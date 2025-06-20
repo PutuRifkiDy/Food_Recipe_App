@@ -5,6 +5,95 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    android:padding="16dp"
+    tools:context=".LoginActivity"
+    android:layout_marginTop="100dp"
+    >
+
+    <!--Start Input Email-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputEmail"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/inputPassword">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LabelName"
+        android:text="@string/email"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginEmail"
+        android:hint="Enter your email"/>
+    </LinearLayout>
+    <!--End Input Email-->
+
+    <!--Start Input Password-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputPassword"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputEmail"
+        >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LabelPassword"
+        android:text="@string/password"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LoginPassword"
+        android:hint="Enter your Password"
+        android:inputType="textPassword"/>
+    </LinearLayout>
+    <!--End Input Password-->
+
+    <!--Start Sign In Button-->
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginButton"
+        android:text="Sign In"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/signupRedirect"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword"/>
+    <!--End Sign In Button-->
+
+    <!--Start Sign Up Option TextView-->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/signupRedirect"
+        android:text="Don't have an account? <b>Sign Up</b>"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/loginButton"/>
+    <!--End Sign Up Option TextView-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
