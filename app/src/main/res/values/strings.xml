@@ -9,7 +9,12 @@
     <string name="hint_email">Enter your Email</string>
     <string name="hint_password">Enter your Password</string>
     <string name="signup">Signup</string>
+    <string name="signin">Sign In</string>
     <string name="login">Login</string>
     <string name="create_account">Create an account</string>
     <string name="enter_credential">Enter your credentials to continue</string>
+    <string name="label_option_signup">Do not have a account? Sign Up</string>
+    <string name="label_welcome_back">Welcome Back!</string>
+    <string name="label_to_food_nust">to FoodNust</string>
+    <string name="label_please_sign_in_to_continue">Please, Sign In to Continue</string>
 </resources>
