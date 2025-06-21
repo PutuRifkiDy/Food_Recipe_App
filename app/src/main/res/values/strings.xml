@@ -4,4 +4,10 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="phone_number">Phone Number</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="hint_phone_number">Enter your Phone Number</string>
+    <string name="hint_email">Enter your Email</string>
+    <string name="hint_password">Enter your Password</string>
+    <string name="signup">Signup</string>
+    <string name="login">Login</string>
 </resources>
