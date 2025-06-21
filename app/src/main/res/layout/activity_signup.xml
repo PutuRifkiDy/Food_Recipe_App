@@ -6,9 +6,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:layout_marginTop="293dp"
+    android:layout_marginTop="48dp"
+    android:padding="44dp"
     tools:context=".SignupActivity">
+
+    <!-- start text create account -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/text_create_account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inputName">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create an account"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#131B25"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter your credentials to continue"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#6B6565"/>
+
+    </LinearLayout>
+    <!-- end text create account -->
+
 
     <!-- start input name -->
     <LinearLayout
@@ -16,9 +46,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/inputName"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/text_create_account">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +60,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_name"
-            android:id="@+id/signupName" />
+            android:autofillHints="name"
+            android:id="@+id/signupName"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input name -->
 
@@ -54,8 +87,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_phone_number"
+            android:autofillHints="phone"
             android:id="@+id/signupPhoneNumber"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- start input phone number -->
 
@@ -81,7 +116,9 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_email"
             android:id="@+id/signupEmail"
-            android:inputType="textEmailAddress"/>
+            android:autofillHints="emailAddress"
+            android:inputType="textEmailAddress"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input email -->
 
@@ -104,8 +141,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Enter your Password"
-            android:id="@+id/signupPassword" />
+            android:autofillHints="password"
+            android:hint="@string/hint_password"
+            android:id="@+id/signupPassword"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input password -->
 
@@ -114,8 +153,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/signupButton"
-        android:layout_marginTop="16dp"
-        android:text="Sign up"
+        android:textSize="14sp"
+        android:layout_marginTop="15dp"
+        android:text="@string/signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword"
@@ -130,15 +170,11 @@
         android:text="Already Registered? Login"
         android:textSize="18sp"
         android:gravity="center"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp"
+        android:textColor="#6B6565"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signupButton"/>
     <!-- end already registered -->
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
