@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="96dp"
+    android:layout_marginTop="48dp"
     android:padding="44dp"
     tools:context=".SignupActivity">
 
@@ -61,7 +61,8 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_name"
             android:autofillHints="name"
-            android:id="@+id/signupName" />
+            android:id="@+id/signupName"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input name -->
 
@@ -88,7 +89,8 @@
             android:hint="@string/hint_phone_number"
             android:autofillHints="phone"
             android:id="@+id/signupPhoneNumber"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- start input phone number -->
 
@@ -115,7 +117,8 @@
             android:hint="@string/hint_email"
             android:id="@+id/signupEmail"
             android:autofillHints="emailAddress"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input email -->
 
@@ -140,7 +143,8 @@
             android:inputType="textPassword"
             android:autofillHints="password"
             android:hint="@string/hint_password"
-            android:id="@+id/signupPassword" />
+            android:id="@+id/signupPassword"
+            android:padding="14dp"/>
     </LinearLayout>
     <!-- end input password -->
 
@@ -150,7 +154,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/signupButton"
         android:textSize="14sp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="15dp"
         android:text="@string/signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
