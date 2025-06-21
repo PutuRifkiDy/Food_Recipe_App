@@ -10,4 +10,6 @@
     <string name="hint_password">Enter your Password</string>
     <string name="signup">Signup</string>
     <string name="login">Login</string>
+    <string name="create_account">Create an account</string>
+    <string name="enter_credential">Enter your credentials to continue</string>
 </resources>
