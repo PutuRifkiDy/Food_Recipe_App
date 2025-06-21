@@ -104,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Enter your Password"
+            android:hint="@string/hint_password"
             android:id="@+id/signupPassword" />
     </LinearLayout>
     <!-- end input password -->
@@ -115,7 +115,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/signupButton"
         android:layout_marginTop="16dp"
-        android:text="Sign up"
+        android:text="@string/signup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword"
