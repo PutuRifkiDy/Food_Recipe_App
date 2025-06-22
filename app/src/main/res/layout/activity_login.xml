@@ -142,7 +142,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/signupRedirect"
-        android:text="@string/optionsignup"
+        android:text="@string/label_option_sign_in"
         android:textSize="14sp"
         android:gravity="center"
         android:textColor="#6B6565"
