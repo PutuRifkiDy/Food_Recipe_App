@@ -49,7 +49,7 @@
         android:id="@+id/tvUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Arya Ekananda"
+        android:text="GusYam"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginStart="12dp"
