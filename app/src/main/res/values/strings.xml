@@ -18,7 +18,6 @@
     <string name="label_welcome_back">Welcome Back!</string>
     <string name="label_to_food_nust">to FoodNust</string>
     <string name="label_please_sign_in_to_continue">Please, Sign In to Continue</string>
-<<<<<<< HEAD
     <string name="label_title_techniques">Deep Frying</string>
     <string name="label_description">Description</string>
     <string name="label_method">Method</string>
@@ -31,8 +30,6 @@
     </string>
     <string name="label_content_description">Deep frying is a cooking method that involves submerging food in hot oil or fat, cooking it quickly at high temperatures. The food is typically coated in batter or bread crumbs before frying, creating a crispy exterior while locking in moisture and flavor. Deep frying is commonly used for cooking a variety of foods such as French fries, chicken, fish, and vegetables. It's known for producing crispy and flavorful results, but it's also important to note that deep-fried foods can be high in calories and fat if consumed frequently.
     </string>
-=======
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> 51ebebbdd9cdeff2610db9302c28e1563376ad34
 </resources>
