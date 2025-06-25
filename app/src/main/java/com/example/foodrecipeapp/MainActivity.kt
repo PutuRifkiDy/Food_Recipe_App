@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> replaceLayoutToFragment(HomeFragment())
                 R.id.add -> replaceLayoutToFragment(AddRecipeFragment())
+                R.id.profile -> replaceLayoutToFragment(ProfileFragment())
 
                 else ->{
 
