@@ -8,7 +8,7 @@
     <string name="hint_phone_number">Enter your Phone Number</string>
     <string name="hint_email">Enter your Email</string>
     <string name="hint_password">Enter your Password</string>
-    <string name="signup">Signup</string>
+    <string name="signup">Sign Up</string>
     <string name="signin">Sign In</string>
     <string name="login">Login</string>
     <string name="create_account">Create an account</string>
