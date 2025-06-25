@@ -27,13 +27,38 @@ class SignupActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(this)
 
         binding.signupButton.setOnClickListener{
-            val signupName = binding.signupName.text.toString()
-            val signupPhone = binding.signupPhoneNumber.text.toString()
-            val signupEmail = binding.signupEmail.text.toString()
-            val signupPassword = binding.signupPassword.text.toString()
+            val signupName = binding.signupName.text.toString().trim()
+            val signupPhone = binding.signupPhoneNumber.text.toString().trim()
+            val signupEmail = binding.signupEmail.text.toString().trim()
+            val signupPassword = binding.signupPassword.text.toString().trim()
 
-            // store ke database di fungsi yang udah dibuat di bawah
-            signupDatabase(signupName, signupPhone, signupEmail, signupPassword)
+            var isEmptyFields = false
+
+            if (signupName.isEmpty()) {
+                isEmptyFields = true
+                binding.signupName.error = "This field must be filled"
+            }
+
+            if (signupPhone.isEmpty()) {
+                isEmptyFields = true
+                binding.signupPhoneNumber.error = "This field must be filled"
+            }
+
+            if (signupEmail.isEmpty()) {
+                isEmptyFields = true
+                binding.signupEmail.error = "This field must be filled"
+            }
+
+            if (signupPassword.isEmpty()) {
+                isEmptyFields = true
+                binding.signupPassword.error = "This field must be filled"
+            }
+
+            if (!isEmptyFields) {
+                // store ke database di fungsi yang udah dibuat di bawah
+                signupDatabase(signupName, signupPhone, signupEmail, signupPassword)
+            }
+
         }
 
         // redirect ke login page use intent
