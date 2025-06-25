@@ -39,10 +39,16 @@ class HomeFragment : Fragment() {
 
         // Akses tombol More
         val moreButton = view.findViewById<Button>(R.id.moreTechniques)
+        val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
 
         // Intent ke CookingTechniquesActivity
         moreButton.setOnClickListener {
-            val intent = Intent(requireContext(), CookingTechniquesActicity::class.java)
+            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
+            startActivity(intent)
+        }
+
+        moreButton1.setOnClickListener {
+            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
             startActivity(intent)
         }
 
