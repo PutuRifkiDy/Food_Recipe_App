@@ -8,29 +8,44 @@
     tools:context=".CookingTechniquesActicity">
 
     <LinearLayout
+        android:id="@+id/backLabelTechniques"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/backLabelTechniques"
         android:layout_marginTop="35dp"
-        android:orientation="vertical"
-        android:layout_marginBottom="20dp"
         android:layout_marginStart="44dp"
         android:layout_marginEnd="44dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/contentTechniques"
-        >
+        app:layout_constraintBottom_toTopOf="@id/contentTechniques">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/labelTitleTechniques"
-            android:text="@string/label_title_techniques"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#93C47D"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/backButtonTechniques"
+                android:layout_width="24dp"
+                android:layout_height="44dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_back"
+                android:background="@android:color/transparent"
+                android:contentDescription="Back"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/labelTitleTechniques"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_title_techniques"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#93C47D" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -91,7 +106,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:id="@+id/contentDescription"
-                        android:text="@string/label_content_description"
                         android:textSize="13sp"
                         android:justificationMode="inter_word"
                         />
@@ -112,7 +126,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:id="@+id/methodDescriptionTechniques"
-                        android:text="@string/deep_frying_steps"
                         android:textSize="13sp"
                         />
 
