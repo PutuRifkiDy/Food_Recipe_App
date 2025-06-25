@@ -5,9 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="44dp"
     tools:context=".LoginActivity"
-    android:layout_marginTop="100dp"
     >
 
     <!--start label Welcomeapp-->
@@ -15,42 +13,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/labelWelcomeApp"
+        android:layout_marginTop="100dp"
         android:orientation="vertical"
         android:layout_marginBottom="60dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/inputEmail"
         >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/labelwelcomeBack"
-        android:text="@string/label_welcome_back"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelwelcomeBack"
+            android:text="@string/label_welcome_back"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/labelFoodNust"
-        android:text="@string/label_to_food_nust"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="#93C47D"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelFoodNust"
+            android:text="@string/label_to_food_nust"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="#93C47D"
+            />
 
-     <TextView
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/labelContinueLogin"
-         android:text="@string/label_please_sign_in_to_continue"
-         android:textSize="14sp"
-         android:textColor="#6B6565"
-         />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/labelContinueLogin"
+             android:text="@string/label_please_sign_in_to_continue"
+             android:textSize="14sp"
+             android:textColor="#6B6565"
+             />
 
     </LinearLayout>
 
@@ -61,6 +62,8 @@
         android:id="@+id/inputEmail"
         android:orientation="vertical"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/inputPassword"
@@ -96,6 +99,8 @@
         android:id="@+id/inputPassword"
         android:orientation="vertical"
         android:layout_marginBottom="16dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputEmail"
@@ -130,6 +135,8 @@
         android:text="@string/signin"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="55dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
         app:layout_constraintBottom_toTopOf="@+id/signupRedirect"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +149,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/signupRedirect"
-        android:text="@string/optionsignup"
+        android:text="@string/label_option_signup"
         android:textSize="14sp"
         android:gravity="center"
         android:textColor="#6B6565"
