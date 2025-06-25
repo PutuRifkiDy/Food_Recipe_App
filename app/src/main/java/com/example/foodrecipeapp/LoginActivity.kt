@@ -27,10 +27,25 @@ class LoginActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(this)
 
         binding.loginButton.setOnClickListener{
-            val loginEmail = binding.loginEmail.text.toString()
-            val loginPassword = binding.LoginPassword.text.toString()
+            val loginEmail = binding.loginEmail.text.toString().trim()
+            val loginPassword = binding.LoginPassword.text.toString().trim()
 
-            loginDatabase(loginEmail, loginPassword)
+            var isEmptyFields = false
+
+            if (loginEmail.isEmpty()) {
+                isEmptyFields = true
+                binding.loginEmail.error = "This field must be filled"
+            }
+
+            if (loginPassword.isEmpty()) {
+                isEmptyFields = true
+                binding.LoginPassword.error = "This field must be filled"
+            }
+
+            if (!isEmptyFields) {
+                loginDatabase(loginEmail, loginPassword)
+            }
+
         }
 
         binding.signupRedirect.setOnClickListener {
