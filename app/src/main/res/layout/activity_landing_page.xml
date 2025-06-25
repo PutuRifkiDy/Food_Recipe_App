@@ -17,7 +17,7 @@
         android:layout_height="172dp"
         android:src="@drawable/logosementarahijau"
         android:contentDescription="Logo"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="130dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -53,12 +53,13 @@
     <!-- Tombol Get Started -->
     <Button
         android:id="@+id/btnGetStarted"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:text="Get Started"
+        android:layout_width="200dp"
+        android:layout_height="55dp"
+        android:text="@string/signin"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/green"
         android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_marginTop="30dp"
         app:cornerRadius="30dp"
         app:layout_constraintTop_toBottomOf="@+id/textSubtitle"
@@ -88,7 +89,7 @@
             android:id="@+id/textSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Signup now"
+            android:text="Sign Up Now"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
