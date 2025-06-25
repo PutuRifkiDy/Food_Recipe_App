@@ -18,4 +18,16 @@
     <string name="label_welcome_back">Welcome Back!</string>
     <string name="label_to_food_nust">to FoodNust</string>
     <string name="label_please_sign_in_to_continue">Please, Sign In to Continue</string>
+    <string name="label_title_techniques">Deep Frying</string>
+    <string name="label_description">Description</string>
+    <string name="label_method">Method</string>
+    <string name="deep_frying_steps">
+    1. Prepare the Food:\nCut into even pieces and dry thoroughly.\nSeason and coat with batter or breading if desired.\n\n
+    2. Heat the Oil:\nChoose high smoke point oil (vegetable, peanut, or canola).\nFill pot or fryer with 2–3 inches of oil and heat to 350°F–375°F.\n\n
+    3. Fry the Food:\nTest oil with a small piece of food.\nFry in small batches until golden brown, flipping for even cooking.\n\n
+    4. Remove and Drain:\nUse a slotted spoon to remove food.\nDrain on a wire rack or paper towels.\n\n
+    5. Season and Serve:\nSeason immediately after frying.\nServe hot and enjoy!
+    </string>
+    <string name="label_content_description">Deep frying is a cooking method that involves submerging food in hot oil or fat, cooking it quickly at high temperatures. The food is typically coated in batter or bread crumbs before frying, creating a crispy exterior while locking in moisture and flavor. Deep frying is commonly used for cooking a variety of foods such as French fries, chicken, fish, and vegetables. It's known for producing crispy and flavorful results, but it's also important to note that deep-fried foods can be high in calories and fat if consumed frequently.
+    </string>
 </resources>
