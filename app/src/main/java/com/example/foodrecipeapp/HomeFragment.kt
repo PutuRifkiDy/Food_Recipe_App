@@ -1,10 +1,12 @@
 package com.example.foodrecipeapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +35,18 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
+        // Akses tombol More
+        val moreButton = view.findViewById<Button>(R.id.moreTechniques)
+
+        // Intent ke CookingTechniquesActivity
+        moreButton.setOnClickListener {
+            val intent = Intent(requireContext(), CookingTechniquesActicity::class.java)
+            startActivity(intent)
+        }
+
+        return view
     }
 
     companion object {
