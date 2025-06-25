@@ -503,7 +503,7 @@
 
                             <!-- Image method -->
                             <ImageView
-                                android:id="@+id/imageMethod"
+                                android:id="@+id/imageMethod1"
                                 android:layout_width="match_parent"
                                 android:layout_height="160dp"
                                 android:scaleType="centerCrop"
