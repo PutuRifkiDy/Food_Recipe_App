@@ -32,4 +32,45 @@
     ]]></string>
     <string name="label_title_recipe">Gado Gado Anisa</string>
     <string name="label_title_food_type">Meat</string>
+    <string name="content_recipe_description">Gado-Gado Spesial Bali adalah perpaduan lezat antara aneka sayuran segar dan cita rasa khas Pulau Dewata. Hidangan ini menyajikan sayuran rebus seperti kacang panjang, kol, kentang, dan tauge yang dipadukan dengan tahu, tempe, dan telur rebus, lalu disiram saus kacang yang gurih dan kaya rempah. Rasa gurih, manis, dan sedikit pedas menciptakan sensasi yang memanjakan lidah. Cocok dinikmati kapan saja—pagi, siang, atau malam—bersama keluarga atau sahabat. Sajian ini tak hanya lezat, tapi juga bergizi dan mengenyangkan.</string>
+    <string name="content_recipe_ingredients"><![CDATA[
+    - Cooked and chilled long-grain white rice: This depends on how many people youre serving. A good rule of thumb is 1-1.5 cups of cooked rice per person.\n\n
+    - Thinly sliced beef: Aim for 100-150 grams (around 3.5-5 ounces) of beef per person. High quality is recommended for best texture.\n\n
+    - Vegetable oil for cooking: Around 2-3 tablespoons of oil should be enough.\n\n
+    - Shallots & Garlic: 2-3 shallots and 2-3 cloves of garlic should be good for flavor.\n\n
+    - Vegetables (optional): This depends on your preference and how much you want to add. Maybe 1/2 cup of chopped vegetables per person.\n\n
+    - Eggs: 1 egg per person is typical.\n\n
+    - Kecap manis: Start with 1-2 tablespoons each and adjust to taste. Kecap manis is sweeter, so use less if you prefer a less sweet profile.\n\n
+    - Sambal matah: Use according to your spice preference. You can buy it pre-made or make your own with a small amount of chilies, shallots, lemongrass, and lime juice.\n\n
+    - Acar & Kerupuk: These are typically served on the side and can be added according to your preference.
+    ]]></string>
+    <string name="content_recipe_tools"><![CDATA[
+    -Wok or large pan\n\n
+    -Spatula\n\n
+    -Plate.\n\n
+    -Spoon.\n\n
+    -Cutting board\n\n
+    -Knife\n\n
+    -Serving bowls (for kecap manis, sambal matah, acar, and kerupuk).
+    ]]></string>
+    <string name="content_recipe_steps"><![CDATA[
+    1.First, peel and puree the onion and garlic \n\n
+    2.Heat the oil in a skillet over medium heat or mix it with butter \n\n
+    3.After the oil is hot, fry the red and white onions until fragrant \n\n
+    4.Add eggs and stir-fry until half cooked \n\n
+    5.Enter the white rice that was prepared \n\n
+    6.Add sugar, salt, soy sauce, and chili sauce according to taste and stir with a spatula until all parts of the rice are evenly mixed with the spices \n\n
+    7.After thoroughly mixed, fried rice is ready to be served \n\n
+    8.As a complement, you can add eggs, cucumber, tomatoes, or some other complements according to taste.
+    ]]></string>
+    <string name="content_recipe_nutrition"><![CDATA[
+    - Calories: A typical serving of nasi goreng can range from around 300 to 600 calories, depending on factors like portion size, ingredients used, and cooking methods.\n\n
+    - Carbohydrates: Nasi goreng is primarily made with rice, which is a carbohydrate-rich food. Depending on the amount of rice used and any additional sources of carbohydrates such as vegetables or sweet soy sauce, a serving of nasi goreng can contain anywhere from 30 to 80 grams of carbohydrates or more.\n\n
+    - Protein: Protein content in nasi goreng can vary depending on whether it includes meat, seafood, tofu, or eggs. A typical serving might provide around 10 to 20 grams of protein.\n\n
+    - Fat: The fat content of nasi goreng can vary based on the cooking oil used and any additional sources of fat such as fried shallots or peanuts. A serving might contain anywhere from 10 to 30 grams of fat.\n\n
+    - Fiber: The fiber content can vary depending on the types and amounts of vegetables used in the dish. A serving might contain 2 to 5 grams of fiber.\n\n
+    - Vitamins and Minerals: Nasi goreng can provide various vitamins and minerals depending on its ingredients. Vegetables like carrots, peas, and bell peppers can contribute vitamins A and C, while eggs can provide vitamins B12 and D, among others. The dish may also contain minerals like iron and potassium.
+    ]]></string>
+
+
 </resources>
