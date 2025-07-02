@@ -223,7 +223,7 @@
                 android:textStyle="bold"
                 android:textColor="#000000" />
             <!-- start card food -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -386,7 +386,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end card -->
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
             <!-- end card food -->
 
             <TextView
@@ -399,7 +399,7 @@
                 android:textColor="#000000" />
 
             <!-- start cooking techniques -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -565,7 +565,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end techniques -->
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
             <!-- end cooking techniques -->
 
         </LinearLayout>
