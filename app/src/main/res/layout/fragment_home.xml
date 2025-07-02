@@ -6,8 +6,8 @@
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    
-    
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -163,6 +163,29 @@
                 </LinearLayout>
 
                 <!-- Seafood -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="8dp">
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/circle_bg"
+                        android:padding="12dp"
+                        android:src="@drawable/icon_fish"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Seafood"
+                        android:textSize="12sp"
+                        android:textColor="#000000"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
 
                 <!-- Snack -->
                 <LinearLayout
@@ -543,35 +566,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end techniques -->
                 </LinearLayout>
-<<<<<<< HEAD
-            </ScrollView>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:background="@drawable/circle_bg"
-                    android:padding="12dp"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/icon_fish" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Seafood"
-                    android:textColor="#000000"
-                    android:textSize="12sp" />
-            </LinearLayout>
-=======
             </HorizontalScrollView>
->>>>>>> 58d44eb17451c5f62db955f9ccb0ceb5729bd184
             <!-- end cooking techniques -->
         </LinearLayout>
     </ScrollView>
