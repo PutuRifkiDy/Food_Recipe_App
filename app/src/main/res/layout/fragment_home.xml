@@ -6,8 +6,8 @@
     tools:context=".HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    
-    
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -223,7 +223,7 @@
                 android:textStyle="bold"
                 android:textColor="#000000" />
             <!-- start card food -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -237,7 +237,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         app:cardCornerRadius="16dp"
-                        app:cardElevation="4dp">
+                        app:cardElevation="4dp"
+                        android:id="@+id/card_nasi_goreng">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -386,7 +387,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end card -->
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
             <!-- end card food -->
 
             <TextView
@@ -399,7 +400,7 @@
                 android:textColor="#000000" />
 
             <!-- start cooking techniques -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -565,9 +566,8 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end techniques -->
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
             <!-- end cooking techniques -->
-
         </LinearLayout>
     </ScrollView>
 

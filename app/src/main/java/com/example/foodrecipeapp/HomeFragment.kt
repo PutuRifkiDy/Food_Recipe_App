@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.cardview.widget.CardView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
         // Akses tombol More
         val moreButton = view.findViewById<Button>(R.id.moreTechniques)
         val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
+        val cardRecipes = view.findViewById<CardView>(R.id.card_nasi_goreng)
 
         // Intent ke CookingTechniquesActivity
         moreButton.setOnClickListener {
@@ -49,6 +51,12 @@ class HomeFragment : Fragment() {
 
         moreButton1.setOnClickListener {
             val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
+            startActivity(intent)
+        }
+
+        // intent ke detail recipes
+        cardRecipes.setOnClickListener{
+            val intent = Intent(requireContext(), detailRecipeActivity::class.java)
             startActivity(intent)
         }
 
