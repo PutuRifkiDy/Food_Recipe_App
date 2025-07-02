@@ -200,7 +200,7 @@
                 android:textStyle="bold"
                 android:textColor="#000000" />
             <!-- start card food -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -363,7 +363,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end card -->
                 </LinearLayout>
-            </ScrollView>
+            </HorizontalScrollView>
             <!-- end card food -->
 
             <TextView
@@ -376,7 +376,7 @@
                 android:textColor="#000000" />
 
             <!-- start cooking techniques -->
-            <ScrollView
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <LinearLayout
@@ -452,6 +452,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="More"
+                                android:id="@+id/moreTechniques1"
                                 android:textColor="@android:color/white"
                                 android:background="@drawable/bg_green_rounded"
                                 android:textSize="14sp"
@@ -530,6 +531,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="More"
+                                android:id="@+id/moreTechniques"
                                 android:textColor="@android:color/white"
                                 android:background="@drawable/bg_green_rounded"
                                 android:textSize="14sp"
@@ -540,6 +542,7 @@
                     </androidx.cardview.widget.CardView>
                     <!-- end techniques -->
                 </LinearLayout>
+<<<<<<< HEAD
             </ScrollView>
 
             <LinearLayout
@@ -565,6 +568,9 @@
                     android:textColor="#000000"
                     android:textSize="12sp" />
             </LinearLayout>
+=======
+            </HorizontalScrollView>
+>>>>>>> 58d44eb17451c5f62db955f9ccb0ceb5729bd184
             <!-- end cooking techniques -->
 
         </LinearLayout>
