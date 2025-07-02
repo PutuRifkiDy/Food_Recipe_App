@@ -2,11 +2,7 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-<<<<<<< HEAD
       <SelectionState runConfigName="FoodRecipeApp.app">
-=======
-      <SelectionState runConfigName="app">
->>>>>>> 9933b3c4cbf14b3d7a8034477b5f517fdaf23cb2
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
