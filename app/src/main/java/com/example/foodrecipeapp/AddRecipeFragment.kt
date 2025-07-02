@@ -1,10 +1,20 @@
 package com.example.foodrecipeapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Spinner
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,12 +31,27 @@ class AddRecipeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var selectedImageUri: Uri? = null
+    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        // Inisialisasi launcher untuk pilih gambar
+        pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                    val data: Intent? = result.data
+                    selectedImageUri = data?.data
+                    val imagePreview = view?.findViewById<ImageView>(R.id.imagePreview)
+                    imagePreview?.setImageURI(selectedImageUri)
+                    imagePreview?.visibility = View.VISIBLE
+                }
+            }
     }
 
     override fun onCreateView(
@@ -35,6 +60,52 @@ class AddRecipeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add_recipe, container, false)
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Ambil referensi Spinner
+        val spinner = view.findViewById<Spinner>(R.id.categorySpinner)
+        // Data kategori
+        val categories = listOf("Choose Category", "Breakfast", "Lunch", "Dinner", "Dessert")
+
+
+        // Adapter untuk mengisi data ke spinner
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_dropdown_item,
+            categories
+        )
+
+        // Set adapter ke spinner
+        spinner.adapter = adapter
+
+        // Optional: aksi saat item dipilih
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>, view: View, position: Int, id: Long
+            ) {
+                val selected = categories[position]
+                // Lakukan sesuatu jika kategori dipilih
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Jika tidak ada yang dipilih
+            }
+        }
+
+        // Upload Gambar
+        val uploadContainer = view.findViewById<LinearLayout>(R.id.uploadContainer)
+        uploadContainer.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            pickImageLauncher.launch(intent)
+        }
+
+
+
     }
 
     companion object {
