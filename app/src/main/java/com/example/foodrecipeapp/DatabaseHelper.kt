@@ -20,6 +20,8 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_PHONE = "phone_number"
         private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PASSWORD = "password"
+        private const val COLUMN_ABOUT = "about"
+        private const val COLUMN_GENDER = "gender"
 
         // table category recipe
         private const val TABLE_CATEGORY = "category_recipe"
@@ -50,7 +52,9 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_NAME TEXT,
                 $COLUMN_PHONE TEXT,
                 $COLUMN_EMAIL TEXT UNIQUE,
-                $COLUMN_PASSWORD TEXT
+                $COLUMN_PASSWORD TEXT,
+                $COLUMN_ABOUT TEXT,
+                $COLUMN_GENDER TEXT
             )
         """.trimIndent()
 
