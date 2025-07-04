@@ -2,12 +2,14 @@ package com.example.foodrecipeapp
 
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -58,6 +60,12 @@ class ProfileFragment : Fragment() {
         // akses semua button
         val editProfile = view.findViewById<LinearLayout>(R.id.btnEditProfile)
         val logOut = view.findViewById<LinearLayout>(R.id.btnLogout)
+        val btnBack = view.findViewById<ImageView>(R.id.btnBack)
+
+        btnBack.setOnClickListener{
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
 
         logOut.setOnClickListener{
             logoutUser()
