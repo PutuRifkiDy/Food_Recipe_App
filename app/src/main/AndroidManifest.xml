@@ -20,16 +20,16 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false"></activity>
         <activity
             android:name=".CookingTechniquesActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".SignupActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"></activity>
         <activity
             android:name=".detailRecipeActivity"
             android:exported="false">
