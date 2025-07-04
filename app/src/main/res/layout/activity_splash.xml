@@ -19,7 +19,7 @@
             android:id="@+id/logo"
             android:layout_width="304dp"
             android:layout_height="225dp"
-            app:srcCompat="@drawable/logosementara"
+            app:srcCompat="@drawable/logoputih"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
