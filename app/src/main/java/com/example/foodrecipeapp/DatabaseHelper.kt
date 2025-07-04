@@ -20,6 +20,8 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_PHONE = "phone_number"
         private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PASSWORD = "password"
+        private const val COLUMN_ABOUT = "about"
+        private const val COLUMN_GENDER = "gender"
 
         // table category recipe
         private const val TABLE_CATEGORY = "category_recipe"
@@ -50,7 +52,9 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_NAME TEXT,
                 $COLUMN_PHONE TEXT,
                 $COLUMN_EMAIL TEXT UNIQUE,
-                $COLUMN_PASSWORD TEXT
+                $COLUMN_PASSWORD TEXT,
+                $COLUMN_ABOUT TEXT,
+                $COLUMN_GENDER TEXT
             )
         """.trimIndent()
 
@@ -126,6 +130,29 @@ class DatabaseHelper(private val context: Context):
         return userExists
     }
     // end read user
+
+    // cursor ke row user yang telah login
+    fun getUserByEmail(email: String): String? {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_USER, // nama tabel yang ingin di cari datanya
+            arrayOf(COLUMN_NAME), // kolom apa yang ingin diambil
+            "$COLUMN_EMAIL = ?", // where emailny apa
+            arrayOf(email), // argument untuk ganti tanya tanya di atas
+            null,
+            null,
+            null
+        )
+
+        var name: String? = null
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
+        }
+
+        cursor.close()
+        return name
+    }
 
 
 }

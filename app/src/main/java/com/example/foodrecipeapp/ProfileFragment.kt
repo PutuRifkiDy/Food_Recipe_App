@@ -1,12 +1,18 @@
 package com.example.foodrecipeapp
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,13 +44,47 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
+        // fungsi logout
+        fun logoutUser() {
+            val sharedPref = requireContext().getSharedPreferences("UserSession", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.clear()
+            editor.apply()
+
+            Toast.makeText(requireContext(), "Logout Successfull", Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+
         // akses semua button
         val editProfile = view.findViewById<LinearLayout>(R.id.btnEditProfile)
+        val logOut = view.findViewById<LinearLayout>(R.id.btnLogout)
+        val btnBack = view.findViewById<ImageView>(R.id.btnBack)
+
+        btnBack.setOnClickListener{
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        logOut.setOnClickListener{
+            logoutUser()
+        }
 
         editProfile.setOnClickListener {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
         }
+
+        // ambil preferences user yang login
+        // akses text view, mengambil user login dari share prefrences
+        val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
+        val userName = sharedPref.getString("user_name", "Guest")
+
+        // set text viewnya
+        val nameTextView = view.findViewById<TextView>(R.id.tvUsername)
+        nameTextView.text = userName ?: "Guest"
+
         return view
     }
 

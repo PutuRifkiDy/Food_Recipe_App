@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +50,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        // intent ke cooking techniques
         moreButton1.setOnClickListener {
             val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
             startActivity(intent)
@@ -59,6 +61,14 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), detailRecipeActivity::class.java)
             startActivity(intent)
         }
+
+        // akses text view, mengambil user login dari share prefrences
+        val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
+        val userName = sharedPref.getString("user_name", "Guest")
+
+        // set text viewnya
+        val greetingTextView = view.findViewById<TextView>(R.id.greetingName)
+        greetingTextView.text = "Welcome, $userName!"
 
         return view
     }
