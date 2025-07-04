@@ -85,8 +85,8 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="12dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
@@ -99,78 +99,114 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            >
 
             <!-- Card 1 -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_nasi_goreng"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
+                <!-- Isi Card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="8dp"
-                    android:background="@color/green">
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_recipe"
+                    android:padding="10dp"
+                    android:gravity="center_vertical">
 
+                    <!-- Gambar -->
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/content_food"
+                        android:background="@drawable/bg_green_rounded"
+                        android:clipToOutline="true"
+                        android:outlineProvider="background"
+                        android:scaleType="centerCrop" />
+
+                    <!-- Konten teks -->
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="6dp">
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp">
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/icon_user_temporary"
-                            android:layout_marginEnd="6dp" />
+                        <!-- Nama Pemilik dan Ikon -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
 
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/icon_user_temporary"
+                                android:layout_marginEnd="6dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pak Anisa"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+
+                        <!-- Nama Warung -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pak Gembus"
-                            android:textStyle="bold"
+                            android:text="Warung Gado Gado"
                             android:textColor="@color/black"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:layout_marginTop="4dp" />
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:layout_marginBottom="6dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/icon_nasi_goreng" />
-
+                        <!-- Kategori -->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|start"
-                            android:layout_margin="8dp"
-                            android:paddingHorizontal="15dp"
-                            android:paddingVertical="4dp"
-                            android:background="@drawable/bg_rounded_label"
-                            android:text="Meat"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </FrameLayout>
+                            android:text="Vegetable"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="2dp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nasi Goreng Sapi Bali"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        <!-- Deskripsi -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gado-gado spesial adalah variasi dari hidangan gado-gado yang biasanya memiliki tambahan bahan atau penyajian yang lebih kaya."
+                            android:justificationMode="inter_word"
+                            android:textSize="12sp"
+                            android:textColor="@color/black"
+                            android:maxLines="3"
+                            android:ellipsize="end"
+                            android:layout_marginTop="2dp" />
+
+                        <!-- Tombol Edit -->
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:text="View"
+                            android:textSize="10sp"
+                            android:textColor="@android:color/white"
+                            android:backgroundTint="#4D7CFE"
+                            android:layout_marginTop="6dp"
+                            android:layout_gravity="end"
+                            android:paddingLeft="14dp"
+                            android:paddingRight="14dp"
+                            android:minWidth="0dp"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
