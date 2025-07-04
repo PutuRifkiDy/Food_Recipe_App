@@ -64,6 +64,16 @@ class LoginActivity : AppCompatActivity() {
     private fun loginDatabase(email: String, password: String) {
         val userExists = databaseHelper.readUser(email, password)
         if (userExists) {
+            val name = databaseHelper.getUserByEmail(email)
+
+            // simpan ke share preference biar tau siapa yang login
+            val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putString("user_name", name)
+            editor.putString("user_email", email)
+            editor.apply()
+
+
             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

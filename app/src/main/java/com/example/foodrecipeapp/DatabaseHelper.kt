@@ -127,5 +127,28 @@ class DatabaseHelper(private val context: Context):
     }
     // end read user
 
+    // cursor ke row user yang telah login
+    fun getUserByEmail(email: String): String? {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_USER,
+            arrayOf(COLUMN_NAME),
+            "$COLUMN_EMAIL = ?",
+            arrayOf(email),
+            null,
+            null,
+            null
+        )
+
+        var name: String? = null
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
+        }
+
+        cursor.close()
+        return name
+    }
+
 
 }
