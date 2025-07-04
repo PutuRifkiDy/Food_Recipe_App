@@ -82,6 +82,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Label Gender -->
+    <TextView
+        android:id="@+id/tvGenderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAboutDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Gender -->
+    <TextView
+        android:id="@+id/tvGenderDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvGenderLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Label Phone Number -->
+    <TextView
+        android:id="@+id/tvPhoneNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvGenderDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Phone Number -->
+    <TextView
+        android:id="@+id/tvPhoneNumberDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumberLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Label Email -->
+    <TextView
+        android:id="@+id/tvEmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Phone Number -->
+    <TextView
+        android:id="@+id/tvEmailDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <!-- Kontainer Menu -->
     <LinearLayout
         android:id="@+id/menuContainer"
@@ -89,7 +161,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/tvAboutDesc"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailDesc"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -154,7 +226,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#CCCCCC" />
-
 
         <!-- Log Out -->
         <LinearLayout

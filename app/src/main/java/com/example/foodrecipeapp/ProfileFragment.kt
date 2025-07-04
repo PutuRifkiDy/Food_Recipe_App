@@ -80,13 +80,22 @@ class ProfileFragment : Fragment() {
         // akses text view, mengambil user login dari share prefrences
         val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
         val userName = sharedPref.getString("user_name", "Guest")
+        val userPhoneNumber = sharedPref.getString("user_phone", "-")
+        val userGender = sharedPref.getString("user_gender", "-")
         val about = sharedPref.getString("user_about", "-")
+        val userEmail = sharedPref.getString("user_email", "-")
 
         // set text viewnya
         val nameTextView = view.findViewById<TextView>(R.id.tvUsername)
         val aboutTextView = view.findViewById<TextView>(R.id.tvAboutDesc)
+        val phoneTextView = view.findViewById<TextView>(R.id.tvPhoneNumberDesc)
+        val genderTextView = view.findViewById<TextView>(R.id.tvGenderDesc)
+        val emailTextView = view.findViewById<TextView>(R.id.tvEmailDesc)
         nameTextView.text = userName ?: "Guest"
         aboutTextView.text = about ?: "-"
+        phoneTextView.text = userPhoneNumber ?: "-"
+        genderTextView.text = userGender ?: "-"
+        emailTextView.text = userEmail ?: "-"
 
         return view
     }
