@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +46,16 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
         }
+
+        // ambil preferences user yang login
+        // akses text view, mengambil user login dari share prefrences
+        val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
+        val userName = sharedPref.getString("user_name", "Guest")
+
+        // set text viewnya
+        val nameTextView = view.findViewById<TextView>(R.id.tvUsername)
+        nameTextView.text = "$userName"
+
         return view
     }
 

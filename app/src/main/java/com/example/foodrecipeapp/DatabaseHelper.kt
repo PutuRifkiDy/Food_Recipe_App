@@ -131,10 +131,10 @@ class DatabaseHelper(private val context: Context):
     fun getUserByEmail(email: String): String? {
         val db = readableDatabase
         val cursor = db.query(
-            TABLE_USER,
-            arrayOf(COLUMN_NAME),
-            "$COLUMN_EMAIL = ?",
-            arrayOf(email),
+            TABLE_USER, // nama tabel yang ingin di cari datanya
+            arrayOf(COLUMN_NAME), // kolom apa yang ingin diambil
+            "$COLUMN_EMAIL = ?", // where emailny apa
+            arrayOf(email), // argument untuk ganti tanya tanya di atas
             null,
             null,
             null
