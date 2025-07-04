@@ -64,14 +64,22 @@ class LoginActivity : AppCompatActivity() {
     private fun loginDatabase(email: String, password: String) {
         val userExists = databaseHelper.readUser(email, password)
         if (userExists) {
-            val name = databaseHelper.getUserByEmail(email)
+            val user = databaseHelper.getUserDataByEmail(email)
 
-            // simpan ke share preference biar tau siapa yang login
-            val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putString("user_name", name)
-            editor.putString("user_email", email)
-            editor.apply()
+            if (user != null) {
+                val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
+                val editor = sharedPref.edit()
+
+                // Simpan semua data user ke SharedPreferences
+                editor.putInt("user_id", user.id)
+                editor.putString("user_name", user.name)
+                editor.putString("user_email", user.email)
+                editor.putString("user_phone", user.phone)
+                editor.putString("user_about", user.about)
+                editor.putString("user_gender", user.gender)
+                editor.putString("user_birthday", user.birthday)
+                editor.apply()
+            }
 
 
             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()

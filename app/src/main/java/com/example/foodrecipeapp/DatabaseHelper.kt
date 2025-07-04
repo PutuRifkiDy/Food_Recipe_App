@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.foodrecipeapp.model.User
 
 class DatabaseHelper(private val context: Context):
         SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
@@ -11,7 +12,7 @@ class DatabaseHelper(private val context: Context):
     // start declare constanta
     companion object {
         private const val DATABASE_NAME = "FoodRecipe.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2
 
         // table user
         private const val TABLE_USER = "user"
@@ -22,6 +23,7 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_ABOUT = "about"
         private const val COLUMN_GENDER = "gender"
+        private const val COLUMN_BIRTHDAY = "birthday"
 
         // table category recipe
         private const val TABLE_CATEGORY = "category_recipe"
@@ -54,7 +56,8 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_EMAIL TEXT UNIQUE,
                 $COLUMN_PASSWORD TEXT,
                 $COLUMN_ABOUT TEXT,
-                $COLUMN_GENDER TEXT
+                $COLUMN_GENDER TEXT,
+                $COLUMN_BIRTHDAY TEXT
             )
         """.trimIndent()
 
@@ -154,5 +157,34 @@ class DatabaseHelper(private val context: Context):
         return name
     }
 
+    fun getUserDataByEmail(email: String): User? {
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_USER,
+            null,
+            "$COLUMN_EMAIL = ?",
+            arrayOf(email),
+            null,
+            null,
+            null
+        )
+
+        var user: User? = null
+        if (cursor.moveToFirst()) {
+            user = User(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_USER_ID)),
+                name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+                phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
+                email = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMAIL)),
+                password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD)),
+                about = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ABOUT)),
+                gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER)),
+                birthday = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDAY))
+            )
+        }
+
+        cursor.close()
+        return user
+    }
 
 }
