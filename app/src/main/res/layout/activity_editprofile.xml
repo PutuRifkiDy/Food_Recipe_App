@@ -80,6 +80,15 @@
                 app:tint="@color/green" />
         </LinearLayout>
 
+        <!-- Personal Details -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"/>
+
         <!-- About -->
         <RelativeLayout
             android:layout_width="match_parent"
