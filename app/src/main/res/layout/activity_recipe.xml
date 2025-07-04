@@ -118,7 +118,7 @@
 
             <ImageView
                 android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_height="120dp"
                 android:src="@drawable/content_food"
                 android:scaleType="centerCrop"/>
 
@@ -141,6 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vegetable"
+                    android:textStyle="bold"
                     android:textSize="14sp"
                     android:textColor="@color/white"/>
 
@@ -148,6 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gado-gado spesial adalah variasi dari hidangan gado-gado yang biasanya memiliki tambahan bahan atau penyajian yang lebih kaya."
+                    android:justificationMode="inter_word"
                     android:textSize="12sp"
                     android:textColor="@color/black"
                     android:maxLines="3"/>
