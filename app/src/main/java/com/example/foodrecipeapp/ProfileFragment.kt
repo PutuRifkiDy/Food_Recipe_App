@@ -4,6 +4,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.media.Image
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,10 +50,11 @@ class ProfileFragment : Fragment() {
             val sharedPref = requireContext().getSharedPreferences("UserSession", MODE_PRIVATE)
             val editor = sharedPref.edit()
             editor.clear()
+            editor.remove("is_guest")
             editor.apply()
 
             Toast.makeText(requireContext(), "Logout Successfull", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireContext(), LoginActivity::class.java)
+            val intent = Intent(requireContext(), LandingPageActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }
@@ -84,6 +86,15 @@ class ProfileFragment : Fragment() {
         val userGender = sharedPref.getString("user_gender", "-")
         val about = sharedPref.getString("user_about", "-")
         val userEmail = sharedPref.getString("user_email", "-")
+
+        // untuk cek apakah orang ini guest
+        val isGuest = sharedPref.getBoolean("is_guest", false)
+        if (isGuest) {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+            return null
+        }
 
         // set text viewnya
         val nameTextView = view.findViewById<TextView>(R.id.tvUsername)

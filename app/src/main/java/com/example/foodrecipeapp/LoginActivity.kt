@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("user_about", user.about)
                 editor.putString("user_gender", user.gender)
                 editor.putString("user_birthday", user.birthday)
+                editor.putBoolean("is_guest", false)
                 editor.apply()
             }
 

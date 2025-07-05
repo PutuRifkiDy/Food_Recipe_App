@@ -86,7 +86,7 @@ class EditProfileActivity : AppCompatActivity() {
                 editor.putString("user_name", newName)
                 editor.putString("user_about", newAbout)
                 editor.putString("user_birthday", newBirthday)
-                editor.putString("phone_number", newPhone)
+                editor.putString("user_phone", newPhone)
                 editor.putString("user_email", newEmail)
                 editor.putString("user_gender", selectedGender)
                 editor.apply()

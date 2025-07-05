@@ -59,7 +59,19 @@ class AddRecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_recipe, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_recipe, container, false)
+
+        // untuk cek apakah orang ini guest
+        val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
+        val isGuest = sharedPref.getBoolean("is_guest", false)
+        if (isGuest) {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+            return null
+        }
+
+        return view
     }
 
 

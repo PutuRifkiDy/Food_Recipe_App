@@ -30,5 +30,18 @@ class LandingPageActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        binding.btnGetStarted.setOnClickListener{
+            // add session is guest = true
+            val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.putBoolean("is_guest", true)
+            editor.putString("user_name", "Guest")
+            editor.apply()
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }
