@@ -9,9 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -31,6 +34,7 @@ class AddRecipeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var databaseHelper: DatabaseHelper
     private var selectedImageUri: Uri? = null
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
@@ -116,7 +120,61 @@ class AddRecipeFragment : Fragment() {
             pickImageLauncher.launch(intent)
         }
 
+        // proses insert recipe
+        val addButton = view.findViewById<Button>(R.id.addRecipeButton)
+        databaseHelper = DatabaseHelper(requireContext())
+        addButton.setOnClickListener{
+            val name = view.findViewById<EditText>(R.id.inputRecipeName).text.toString()
+            val description = view.findViewById<EditText>(R.id.inputRecipeDescription).text.toString()
+            val ingredients = view.findViewById<EditText>(R.id.inputRecipeIngredients).text.toString()
+            val tools = view.findViewById<EditText>(R.id.inputRecipeTools).text.toString()
+            val steps = view.findViewById<EditText>(R.id.inputRecipeSteps).text.toString()
+            val nutritionInfo = view.findViewById<EditText>(R.id.inputRecipeNutritionInfo).text.toString()
+            val categoryName = spinner.selectedItem.toString()
 
+            // validasi input kosong
+            if (
+                name.isBlank() ||
+                description.isBlank() ||
+                ingredients.isBlank() ||
+                tools.isBlank() ||
+                steps.isBlank() ||
+                nutritionInfo.isBlank() ||
+                categoryName == "Choose Category" ||
+                selectedImageUri == null
+            ) {
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // ambil user id dari share preferences
+            val sharePref = requireContext().getSharedPreferences("UserSession", AppCompatActivity.MODE_PRIVATE)
+            val userId = sharePref.getInt("user_id", -1)
+
+            if (userId == -1) {
+                Toast.makeText(requireContext(), "User not found", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // ambil ID Kategori dari nama kategori
+            val categoryId = databaseHelper.getOrInsertCategory(categoryName)
+
+            if (categoryId == -1) {
+                Toast.makeText(context, "Invalid category", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // simpan recipe ke database
+            val imagePath = selectedImageUri.toString() // simpan pathnya aja
+            val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, imagePath, categoryId, userId)
+
+            if (result != -1L) {
+                Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Failed to add recipe", Toast.LENGTH_SHORT).show()
+            }
+        }
+        // end proses insert recipe
 
     }
 

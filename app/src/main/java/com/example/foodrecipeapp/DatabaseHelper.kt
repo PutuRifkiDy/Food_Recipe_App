@@ -187,4 +187,66 @@ class DatabaseHelper(private val context: Context):
         return user
     }
 
+    // start insert recipe
+    fun insertRecipe(
+        name: String,
+        description: String,
+        ingredients: String,
+        tools: String,
+        steps: String,
+        nutrition: String,
+        imagePath: String,
+        categoryId: Int,
+        userId: Int
+    ): Long {
+        val values = ContentValues().apply {
+            put(COLUMN_RECIPE_NAME, name)
+            put(COLUMN_DESCRIPTION, description)
+            put(COLUMN_INGREDIENTS, ingredients)
+            put(COLUMN_TOOLS, tools)
+            put(COLUMN_STEPS, steps)
+            put(COLUMN_NUTRITION_INFO, nutrition)
+            put(COLUMN_IMAGE_PATH, imagePath)
+            put(COLUMN_RECIPE_CATEGORY_ID, categoryId)
+            put(COLUMN_RECIPE_USER_ID, userId)
+        }
+
+        val db = writableDatabase
+        return db.insert(TABLE_RECIPE, null, values)
+    }
+    // end insert recipe
+
+    // start getOrInsertCategory
+    fun getOrInsertCategory(categoryName: String): Int {
+        val db = writableDatabase
+        var categoryId: Int? = null
+
+        // apakah kategori sudah ada ?
+        val cursor = db.query(
+            TABLE_CATEGORY,
+            arrayOf(COLUMN_CATEGORY_ID),
+            "$COLUMN_CATEGORY_NAME = ?",
+            arrayOf(categoryName),
+            null, null, null
+        )
+
+        if(cursor.moveToFirst()) {
+            categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_ID))
+        } else {
+            // insert kategori baru kalo kategori tersebut belum ada
+            val values = ContentValues().apply {
+                put(COLUMN_CATEGORY_NAME, categoryName)
+            }
+
+            val newId = db.insert(TABLE_CATEGORY, null, values)
+            if (newId != -1L) {
+                categoryId = newId.toInt()
+            }
+        }
+
+        cursor.close()
+        return categoryId ?: -1
+    }
+    // end getOrInsertCategory
+
 }
