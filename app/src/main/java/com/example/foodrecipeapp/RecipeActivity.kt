@@ -5,10 +5,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -82,9 +85,28 @@ class RecipeActivity : AppCompatActivity() {
             )
             layoutParams.bottomMargin = 16
 
+            // menampilkan cardnya semua
             cardView.layoutParams = layoutParams
             container.addView(cardView)
 
+            // delete recipe
+            val deleteBtn = cardView.findViewById<Button>(R.id.btnDeleteRecipe)
+            deleteBtn.setOnClickListener {
+                AlertDialog.Builder(this)
+                    .setTitle("Delete Recipe")
+                    .setMessage("Are you sure you want to delete this recipe?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        val success = dbHelper.deleteRecipeById(recipe.id)
+                        if (success) {
+                            Toast.makeText(this, "Recipe deleted", Toast.LENGTH_SHORT).show()
+                            recreate()
+                        } else {
+                            Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
+            }
         }
     }
 }

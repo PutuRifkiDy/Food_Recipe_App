@@ -317,5 +317,15 @@ class DatabaseHelper(private val context: Context):
         db.close()
         return count
     }
+    // end count card berdasarkan id usernya
+
+    // start delete my recipe berdasarkan id recipe
+    fun deleteRecipeById(recipeId: Int): Boolean {
+        val db = writableDatabase
+        val result = db.delete(TABLE_RECIPE, "id = ?", arrayOf(recipeId.toString()))
+        db.close()
+        return result > 0
+    }
+    // end delete my recipe berdasarkan id recipe
 
 }
