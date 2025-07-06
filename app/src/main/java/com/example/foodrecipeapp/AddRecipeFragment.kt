@@ -3,6 +3,7 @@ package com.example.foodrecipeapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract.Profile
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import java.io.File
+import java.io.FileOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -165,11 +168,28 @@ class AddRecipeFragment : Fragment() {
             }
 
             // simpan recipe ke database
-            val imagePath = selectedImageUri.toString() // simpan pathnya aja
+            fun saveImageToInternalStorage(uri: Uri): String {
+                val inputStream = requireContext().contentResolver.openInputStream(uri)
+                val fileName = "IMG_${System.currentTimeMillis()}.jpg"
+                val file = File(requireContext().filesDir, fileName)
+
+                inputStream?.use { input ->
+                    FileOutputStream(file).use { output ->
+                        input.copyTo(output)
+                    }
+                }
+
+                return file.absolutePath
+            }
+            val imagePath = saveImageToInternalStorage(selectedImageUri!!) // simpan pathnya aja
             val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, imagePath, categoryId, userId)
 
             if (result != -1L) {
                 Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.putExtra("navigate_to", "profile")
+                startActivity(intent)
+                requireActivity().finish()
             } else {
                 Toast.makeText(requireContext(), "Failed to add recipe", Toast.LENGTH_SHORT).show()
             }

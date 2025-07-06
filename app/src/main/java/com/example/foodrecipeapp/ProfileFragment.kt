@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
         // akses semua button
         val editProfile = view.findViewById<LinearLayout>(R.id.btnEditProfile)
         val logOut = view.findViewById<LinearLayout>(R.id.btnLogout)
+        val myRecipe = view.findViewById<LinearLayout>(R.id.btnMyRecipe)
         val btnBack = view.findViewById<ImageView>(R.id.btnBack)
 
         btnBack.setOnClickListener{
@@ -71,6 +72,11 @@ class ProfileFragment : Fragment() {
 
         logOut.setOnClickListener{
             logoutUser()
+        }
+
+        myRecipe.setOnClickListener{
+            val intent = Intent(requireContext(), RecipeActivity::class.java)
+            startActivity(intent)
         }
 
         editProfile.setOnClickListener {

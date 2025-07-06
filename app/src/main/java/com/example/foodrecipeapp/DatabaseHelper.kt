@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.foodrecipeapp.model.Recipe
 import com.example.foodrecipeapp.model.User
 
 class DatabaseHelper(private val context: Context):
@@ -248,5 +249,73 @@ class DatabaseHelper(private val context: Context):
         return categoryId ?: -1
     }
     // end getOrInsertCategory
+
+    // start get recipes by user id
+    fun getRecipesByUserId(userId: Int): List<Recipe> {
+        val recipes = mutableListOf<Recipe>()
+        val db = readableDatabase
+
+        val cursor = db.query(
+            TABLE_RECIPE,
+            null,
+            "$COLUMN_RECIPE_USER_ID = ?",
+            arrayOf(userId.toString()),
+            null,
+            null,
+            null
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_ID)),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_NAME)),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION)),
+                    ingredients = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INGREDIENTS)),
+                    tools = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOOLS)),
+                    steps = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STEPS)),
+                    nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NUTRITION_INFO)),
+                    imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)),
+                    categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_CATEGORY_ID)),
+                    userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_USER_ID))
+                )
+                recipes.add(recipe)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return recipes
+    }
+    // end recipe by user id
+
+    // start get category name by id categorynya
+    fun getCategoryNameById(categoryId: Int): String {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT category_name FROM category_recipe WHERE id = ?", arrayOf(categoryId.toString()))
+        var name = "Uknown"
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(0)
+        }
+        cursor.close()
+        return name
+    }
+    // end get category by id categorynya
+
+    // start count card berdasarkan id usernya
+    fun countRecipeByUserId(userId: Int): Int {
+        val db = readableDatabase
+        val query = "SELECT COUNT(*) FROM recipe WHERE user_id = ?"
+        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+        var count = 0
+
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0)
+        }
+
+        cursor.close()
+        db.close()
+        return count
+    }
 
 }

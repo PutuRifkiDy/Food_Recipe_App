@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     android:background="@android:color/white">
 
     <LinearLayout
@@ -20,7 +21,8 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                android:id="@+id/backButtonMyRecipe"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:text="GusYam"
                         android:textSize="18sp"
+                        android:id="@+id/tvNameMyRecipe"
                         android:textColor="@color/black"
                         android:textStyle="bold"/>
 
@@ -87,6 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="4 Recipe"
+                        android:id="@+id/tvCountRecipe"
                         android:textSize="14sp"
                         android:textColor="@color/black"
                         android:layout_marginStart="4dp"/>
@@ -104,83 +108,91 @@
             android:textStyle="bold"
             android:layout_marginTop="24dp"/>
 
-        <!-- Recipe Card 1 -->
         <LinearLayout
+            android:id="@+id/llRecipeContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/bg_recipe"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="8dp"
-            android:clipToPadding="false">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="120dp"
-                android:src="@drawable/content_food"
-                android:scaleType="centerCrop"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Warung Gado Gado"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vegetable"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gado-gado spesial adalah variasi dari hidangan gado-gado yang biasanya memiliki tambahan bahan atau penyajian yang lebih kaya."
-                    android:justificationMode="inter_word"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:maxLines="3"/>
-
-                <!-- Edit and Delete Buttons -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="8dp">
-
-                    <Button
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:text="Edit"
-                        android:textSize="11sp"
-                        android:textColor="@color/white"
-                        android:backgroundTint="#4D7CFE"
-                        android:layout_marginStart="60dp"/>
-
-                    <Button
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:text="Delete"
-                        android:textSize="11sp"
-                        android:textColor="@android:color/white"
-                        android:backgroundTint="#FF5656"
-                        android:layout_marginStart="8dp"/>
-                </LinearLayout>
-            </LinearLayout>
+            android:orientation="vertical"
+            android:layout_marginTop="12dp">
         </LinearLayout>
+
+<!--        &lt;!&ndash; Recipe Card 1 &ndash;&gt;-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:background="@drawable/bg_recipe"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:padding="8dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            android:clipToPadding="false">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="120dp"-->
+<!--                android:src="@drawable/content_food"-->
+<!--                android:scaleType="centerCrop"/>-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_marginStart="8dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Warung Gado Gado"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="16sp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Vegetable"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textColor="@color/white"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Gado-gado spesial adalah variasi dari hidangan gado-gado yang biasanya memiliki tambahan bahan atau penyajian yang lebih kaya."-->
+<!--                    android:justificationMode="inter_word"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:maxLines="3"/>-->
+
+<!--                &lt;!&ndash; Edit and Delete Buttons &ndash;&gt;-->
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:layout_marginTop="8dp">-->
+
+<!--                    <Button-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:text="Edit"-->
+<!--                        android:textSize="11sp"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:backgroundTint="#4D7CFE"-->
+<!--                        android:layout_marginStart="60dp"/>-->
+
+<!--                    <Button-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:text="Delete"-->
+<!--                        android:textSize="11sp"-->
+<!--                        android:textColor="@android:color/white"-->
+<!--                        android:backgroundTint="#FF5656"-->
+<!--                        android:layout_marginStart="8dp"/>-->
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 
         <!-- Copy Recipe Card 1 for Recipe Card 2 and 3 -->
         <!-- Untuk contoh static, copy blok di atas sebanyak resep yang ingin ditampilkan -->
