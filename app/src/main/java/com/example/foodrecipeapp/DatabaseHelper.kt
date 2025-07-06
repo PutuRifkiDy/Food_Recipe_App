@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.foodrecipeapp.model.Category
 import com.example.foodrecipeapp.model.Recipe
 import com.example.foodrecipeapp.model.User
 
@@ -327,5 +328,55 @@ class DatabaseHelper(private val context: Context):
         return result > 0
     }
     // end delete my recipe berdasarkan id recipe
+
+    // start getRecipe By id
+    fun getRecipeById(id: Int): Recipe? {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM recipe WHERE id = ?", arrayOf(id.toString()))
+
+        var recipe: Recipe? = null
+        if (cursor.moveToFirst()) {
+            recipe = Recipe(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                name = cursor.getString(cursor.getColumnIndexOrThrow("recipe_name")),
+                description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients")),
+                tools = cursor.getString(cursor.getColumnIndexOrThrow("tools")),
+                steps = cursor.getString(cursor.getColumnIndexOrThrow("steps")),
+                nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow("nutrition_info")),
+                imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path")),
+                categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id")),
+                userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
+            )
+        }
+
+        cursor.close()
+        db.close()
+
+        return recipe
+    }
+    // end get recipe by id
+
+    // start get all category
+    fun getAllCategories(): List<Category> {
+        val categoryList = mutableListOf<Category>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_CATEGORY"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val category = Category(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    category_name = cursor.getString(cursor.getColumnIndexOrThrow("category_name"))
+                )
+                categoryList.add(category)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return categoryList
+    }
+    // end get all category
 
 }

@@ -107,6 +107,15 @@ class RecipeActivity : AppCompatActivity() {
                     .setNegativeButton("No", null)
                     .show()
             }
+
+            // edit recipe
+            val editBtn = cardView.findViewById<Button>(R.id.btnEditRecipe)
+            editBtn.setOnClickListener {
+                val intent = Intent(this, EditRecipeActivity::class.java)
+                intent.putExtra("recipe_id", recipe.id)
+                startActivity(intent)
+            }
+
         }
     }
 }
