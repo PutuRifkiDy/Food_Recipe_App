@@ -167,7 +167,7 @@ class AddRecipeFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // simpan recipe ke database
+            // simpan gambar ke internal
             fun saveImageToInternalStorage(uri: Uri): String {
                 val inputStream = requireContext().contentResolver.openInputStream(uri)
                 val fileName = "IMG_${System.currentTimeMillis()}.jpg"
@@ -182,12 +182,13 @@ class AddRecipeFragment : Fragment() {
                 return file.absolutePath
             }
             val imagePath = saveImageToInternalStorage(selectedImageUri!!) // simpan pathnya aja
+
+            // simpan recipe ke database
             val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, imagePath, categoryId, userId)
 
             if (result != -1L) {
                 Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()
-                val intent = Intent(requireContext(), MainActivity::class.java)
-                intent.putExtra("navigate_to", "profile")
+                val intent = Intent(requireContext(), RecipeActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             } else {
