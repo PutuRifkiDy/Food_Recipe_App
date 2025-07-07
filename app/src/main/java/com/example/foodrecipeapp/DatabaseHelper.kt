@@ -379,4 +379,34 @@ class DatabaseHelper(private val context: Context):
     }
     // end get all category
 
+    // start get all recipe
+    fun getAllRecipe(): List<Recipe> {
+        val recipeList = mutableListOf<Recipe>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_RECIPE"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow("recipe_name")),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                    ingredients = cursor.getString(cursor.getColumnIndexOrThrow("ingredients")),
+                    tools = cursor.getString(cursor.getColumnIndexOrThrow("tools")),
+                    steps = cursor.getString(cursor.getColumnIndexOrThrow("steps")),
+                    nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow("nutrition_info")),
+                    imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path")),
+                    categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id")),
+                    userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
+                )
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return recipeList
+    }
+    // end get all recipe
 }
