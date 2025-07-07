@@ -100,6 +100,12 @@ class HomeFragment : Fragment() {
 
             containerComponent.addView(cardView)
 
+            cardView.setOnClickListener{
+                val intent = Intent(requireContext(), detailRecipeActivity::class.java)
+                intent.putExtra("recipe_id", recipe.id)
+                startActivity(intent)
+            }
+
         }
         return view
     }
