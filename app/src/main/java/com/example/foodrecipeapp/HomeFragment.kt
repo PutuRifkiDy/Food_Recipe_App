@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 
@@ -70,6 +71,15 @@ class HomeFragment : Fragment() {
         val greetingTextView = view.findViewById<TextView>(R.id.greetingName)
         greetingTextView.text = "Welcome, $userName!"
 
+        // ambil remua recipe
+        val dbHelper = DatabaseHelper(requireContext())
+        val recipeList = dbHelper.getAllRecipe()
+        val containerComponent = view.findViewById<LinearLayout>(R.id.container_recipe)
+
+        for(recipe in recipeList){
+
+            val cardView = layoutInflater.inflate(R.layout.home_recipe_card,null)
+        }
         return view
     }
 
