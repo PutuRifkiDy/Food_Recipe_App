@@ -414,7 +414,7 @@ class DatabaseHelper(private val context: Context):
     // get user name by id
     fun getUserByRecipeUserId(recipeUserId: Int): String {
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT $COLUMN_RECIPE_NAME FROM $TABLE_RECIPE WHERE id = ?", arrayOf(recipeUserId.toString()))
+        val cursor = db.rawQuery("SELECT $COLUMN_NAME FROM $TABLE_USER WHERE id = ?", arrayOf(recipeUserId.toString()))
         var name = "Uknown"
 
         if (cursor.moveToFirst()) {

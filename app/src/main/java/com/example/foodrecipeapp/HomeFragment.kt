@@ -82,7 +82,7 @@ class HomeFragment : Fragment() {
 
         for(recipe in recipeList){
             val cardView = layoutInflater.inflate(R.layout.home_recipe_card, containerComponent, false)
-            val userName = dbHelper.getUserByRecipeUserId(recipe.userId)
+            val userTitle = dbHelper.getUserByRecipeUserId(recipe.userId)
             val categoryName = dbHelper.getCategoryNameById(recipe.categoryId)
 
             val tvUser = cardView.findViewById<TextView>(R.id.title_user)
@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
             val category = cardView.findViewById<TextView>(R.id.title_category)
             val titleRecipe = cardView.findViewById<TextView>(R.id.recipe_name)
 
-            tvUser.text = userName
+            tvUser.text = userTitle
             category.text = categoryName
             titleRecipe.text = recipe.name
             // tampilin image
