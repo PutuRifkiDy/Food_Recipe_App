@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import com.bumptech.glide.Glide
+import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +46,7 @@ class HomeFragment : Fragment() {
         // Akses tombol More
         val moreButton = view.findViewById<Button>(R.id.moreTechniques)
         val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
-        val cardRecipes = view.findViewById<CardView>(R.id.card_nasi_goreng)
+//        val cardRecipes = view.findViewById<LinearLayout>(R.id.card_nasi_goreng)
 
         // Intent ke CookingTechniquesActivity
         moreButton.setOnClickListener {
@@ -58,10 +61,10 @@ class HomeFragment : Fragment() {
         }
 
         // intent ke detail recipes
-        cardRecipes.setOnClickListener{
-            val intent = Intent(requireContext(), detailRecipeActivity::class.java)
-            startActivity(intent)
-        }
+//        cardRecipes.setOnClickListener{
+//            val intent = Intent(requireContext(), detailRecipeActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // akses text view, mengambil user login dari share prefrences
         val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
@@ -75,10 +78,28 @@ class HomeFragment : Fragment() {
         val dbHelper = DatabaseHelper(requireContext())
         val recipeList = dbHelper.getAllRecipe()
         val containerComponent = view.findViewById<LinearLayout>(R.id.container_recipe)
+        containerComponent.removeAllViews()
 
         for(recipe in recipeList){
+            val cardView = layoutInflater.inflate(R.layout.home_recipe_card, containerComponent, false)
+            val userName = dbHelper.getUserByRecipeUserId(recipe.userId)
+            val categoryName = dbHelper.getCategoryNameById(recipe.categoryId)
 
-            val cardView = layoutInflater.inflate(R.layout.home_recipe_card,null)
+            val tvUser = cardView.findViewById<TextView>(R.id.title_user)
+            val ivRecipe = cardView.findViewById<ImageView>(R.id.iv_recipe_image)
+            val category = cardView.findViewById<TextView>(R.id.title_category)
+            val titleRecipe = cardView.findViewById<TextView>(R.id.recipe_name)
+
+            tvUser.text = userName
+            category.text = categoryName
+            titleRecipe.text = recipe.name
+            // tampilin image
+            Glide.with(this)
+                .load(recipe.imagePath)
+                .into(ivRecipe)
+
+            containerComponent.addView(cardView)
+
         }
         return view
     }

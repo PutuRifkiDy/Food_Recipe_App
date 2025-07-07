@@ -400,6 +400,7 @@ class DatabaseHelper(private val context: Context):
                     categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id")),
                     userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
                 )
+                recipeList.add(recipe)
             } while (cursor.moveToNext())
         }
 
@@ -411,5 +412,17 @@ class DatabaseHelper(private val context: Context):
     // end get all recipe
 
     // get user name by id
+    fun getUserByRecipeUserId(recipeUserId: Int): String {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT $COLUMN_RECIPE_NAME FROM $TABLE_RECIPE WHERE id = ?", arrayOf(recipeUserId.toString()))
+        var name = "Uknown"
+
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(0)
+        }
+        cursor.close()
+        return name
+    }
+    // end get user name by id
 
 }
