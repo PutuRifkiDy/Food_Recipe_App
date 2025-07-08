@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="24dp"
-                    android:text="Add Menu"
+                    android:text="Edit Recipe"
                     android:textColor="@color/green"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -289,7 +289,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Add Recipe"
+                android:text="Save Changes"
                 android:textSize="14sp"
                 />
             <!-- end button submit -->

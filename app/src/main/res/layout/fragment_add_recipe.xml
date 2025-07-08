@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="24dp"
-                    android:text="Add Menu"
+                    android:text="Add Recipe"
                     android:textColor="@color/green"
                     android:textSize="24sp"
                     android:textStyle="bold" />
