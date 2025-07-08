@@ -425,4 +425,32 @@ class DatabaseHelper(private val context: Context):
     }
     // end get user name by id
 
+    // start update recipe
+    fun updateRecipe(
+        id: Int,
+        name: String,
+        description: String,
+        ingredients: String,
+        tools: String,
+        steps: String,
+        nutritionInfo: String,
+        imagePath: String,
+        categoryId: Int
+    ): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("$COLUMN_RECIPE_NAME", name)
+            put("$COLUMN_DESCRIPTION", description)
+            put("$COLUMN_INGREDIENTS", ingredients)
+            put("$COLUMN_TOOLS", tools)
+            put("$COLUMN_STEPS", steps)
+            put("$COLUMN_NUTRITION_INFO", nutritionInfo)
+            put("$COLUMN_IMAGE_PATH", imagePath)
+            put("$COLUMN_RECIPE_CATEGORY_ID", categoryId)
+        }
+
+        val result = db.update("$TABLE_RECIPE", values, "id = ?", arrayOf(id.toString()))
+        return result > 0
+    }
+
 }

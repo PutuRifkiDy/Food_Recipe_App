@@ -1,19 +1,28 @@
 package com.example.foodrecipeapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.foodrecipeapp.databinding.ActivityEditRecipeBinding
+import java.io.File
+import java.io.FileOutputStream
 
 class EditRecipeActivity : AppCompatActivity() {
     private lateinit var dbHelper: DatabaseHelper
     private var recipeId: Int = -1
     private lateinit var binding: ActivityEditRecipeBinding
+    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
+    private var selectedImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +37,23 @@ class EditRecipeActivity : AppCompatActivity() {
             insets
         }
 
+        pickImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data: Intent? = result.data
+                selectedImageUri = data?.data
+                binding.imagePreview.setImageURI(selectedImageUri)
+                binding.imagePreview.visibility = View.VISIBLE
+            }
+        }
+
+        // intent ke my recipe lagi
+        val btnBack = binding.buttonBack
+        btnBack.setOnClickListener{
+            val intent = Intent(this, RecipeActivity::class.java)
+            startActivity(intent)
+        }
+
+
         dbHelper = DatabaseHelper(this)
         recipeId = intent.getIntExtra("recipe_id", -1)
 
@@ -37,6 +63,7 @@ class EditRecipeActivity : AppCompatActivity() {
             return
         }
 
+        // ambil recipe terdahulu
         val recipe = dbHelper.getRecipeById(recipeId)
         if (recipe == null) {
             Toast.makeText(this, "Recipe not found", Toast.LENGTH_SHORT).show()
@@ -60,9 +87,13 @@ class EditRecipeActivity : AppCompatActivity() {
         inputTools.setText(recipe.tools)
         inputStep.setText(recipe.steps)
         inputNutritionInfo.setText(recipe.nutritionInfo)
-        Glide.with(this)
-            .load(recipe.imagePath)
-            .into(inputImagePath)
+//        val imageFile = File(recipe.imagePath)
+//        Glide.with(this)
+//            .load(Uri.fromFile(imageFile))
+//            .into(inputImagePath)
+////        Glide.with(this)
+////            .load(recipe.imagePath)
+////            .into(inputImagePath)
 
         // set spinner pilihan
         val categoryList = dbHelper.getAllCategories() // Ambil list kategori dari DB
@@ -79,6 +110,85 @@ class EditRecipeActivity : AppCompatActivity() {
                 break
             }
         }
+
+
+        // start input
+        binding.uploadContainer.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            pickImageLauncher.launch(intent)
+        }
+        fun saveImageToInternalStorage(uri: Uri): String {
+            val inputStream = contentResolver.openInputStream(uri)
+            val fileName = "IMG_${System.currentTimeMillis()}.jpg"
+            val file = File(filesDir, fileName)
+
+            inputStream?.use { input ->
+                FileOutputStream(file).use { output ->
+                    input.copyTo(output)
+                }
+            }
+
+            return file.absolutePath
+        }
+
+        binding.updateRecipeButton.setOnClickListener{
+            val name = binding.inputRecipeName.text.toString()
+            val description = binding.inputRecipeDescription.text.toString()
+            val ingredients = binding.inputRecipeIngredients.text.toString()
+            val tools = binding.inputRecipeTools.text.toString()
+            val steps = binding.inputRecipeSteps.text.toString()
+            val nutritionInfo = binding.inputRecipeNutritionInfo.text.toString()
+            val categoryName = binding.categorySpinner.selectedItem.toString()
+
+            if (
+                name.isBlank() ||
+                description.isBlank() ||
+                ingredients.isBlank() ||
+                tools.isBlank() ||
+                steps.isBlank() ||
+                nutritionInfo.isBlank() ||
+                categoryName.isBlank()
+            ) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val categoryId = dbHelper.getOrInsertCategory(categoryName)
+            if (categoryId == -1) {
+                Toast.makeText(this, "Invalid category", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Simpan gambar baru kalau ada
+            val imagePath: String = if (selectedImageUri != null) {
+                saveImageToInternalStorage(selectedImageUri!!)
+            } else {
+                recipe.imagePath // pakai gambar lama
+            }
+
+            val isUpdated = dbHelper.updateRecipe(
+                recipeId,
+                name,
+                description,
+                ingredients,
+                tools,
+                steps,
+                nutritionInfo,
+                imagePath,
+                categoryId
+            )
+
+            if (isUpdated) {
+                Toast.makeText(this, "Recipe updated!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, RecipeActivity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Failed to update recipe", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
     }
 }
