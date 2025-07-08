@@ -92,6 +92,7 @@ class ProfileFragment : Fragment() {
         val userGender = sharedPref.getString("user_gender", "-")
         val about = sharedPref.getString("user_about", "-")
         val userEmail = sharedPref.getString("user_email", "-")
+        val userBirthday = sharedPref.getString("user_birthday", "-")
 
         // untuk cek apakah orang ini guest
         val isGuest = sharedPref.getBoolean("is_guest", false)
@@ -108,11 +109,13 @@ class ProfileFragment : Fragment() {
         val phoneTextView = view.findViewById<TextView>(R.id.tvPhoneNumberDesc)
         val genderTextView = view.findViewById<TextView>(R.id.tvGenderDesc)
         val emailTextView = view.findViewById<TextView>(R.id.tvEmailDesc)
+        val birthTextView = view.findViewById<TextView>(R.id.tvBirthDesc)
         nameTextView.text = userName ?: "Guest"
         aboutTextView.text = about ?: "-"
         phoneTextView.text = userPhoneNumber ?: "-"
         genderTextView.text = userGender ?: "-"
         emailTextView.text = userEmail ?: "-"
+        birthTextView.text = userBirthday ?: "-"
 
         return view
     }
