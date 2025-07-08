@@ -25,13 +25,19 @@ class LandingPageActivity : AppCompatActivity() {
             insets
         }
 
-        binding.textSignIn.setOnClickListener{
+        binding.btnSignUp.setOnClickListener{
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        binding.btnGetStarted.setOnClickListener{
+        binding.btnSignIn.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.textGuest.setOnClickListener{
             // add session is guest = true
             val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
             val editor = sharedPref.edit()
