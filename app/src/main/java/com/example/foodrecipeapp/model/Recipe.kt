@@ -8,6 +8,7 @@ data class Recipe(
     val tools: String,
     val steps: String,
     val nutritionInfo: String,
+    val reference: String,
     val imagePath: String,
     val categoryId: Int,
     val userId: Int

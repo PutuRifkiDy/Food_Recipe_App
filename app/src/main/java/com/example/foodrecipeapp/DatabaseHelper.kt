@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.example.foodrecipeapp.model.Category
 import com.example.foodrecipeapp.model.Recipe
 import com.example.foodrecipeapp.model.User
+import java.lang.ref.Reference
 
 class DatabaseHelper(private val context: Context):
         SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
@@ -14,7 +15,7 @@ class DatabaseHelper(private val context: Context):
     // start declare constanta
     companion object {
         private const val DATABASE_NAME = "FoodRecipe.db"
-        private const val DATABASE_VERSION = 2
+        private const val DATABASE_VERSION = 3
 
         // table user
         private const val TABLE_USER = "user"
@@ -41,6 +42,7 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_TOOLS = "tools"
         private const val COLUMN_STEPS = "steps"
         private const val COLUMN_NUTRITION_INFO = "nutrition_info"
+        private const val COLUMN_REFERENCES = "reference"
         private const val COLUMN_IMAGE_PATH = "image_path"
         private const val COLUMN_RECIPE_CATEGORY_ID = "category_id"
         private const val COLUMN_RECIPE_USER_ID = "user_id"
@@ -81,6 +83,7 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_TOOLS TEXT,
                 $COLUMN_STEPS TEXT,
                 $COLUMN_NUTRITION_INFO TEXT,
+                $COLUMN_REFERENCES TEXT,
                 $COLUMN_IMAGE_PATH TEXT,
                 $COLUMN_RECIPE_CATEGORY_ID INTEGER,
                 $COLUMN_RECIPE_USER_ID INTEGER,
@@ -197,6 +200,7 @@ class DatabaseHelper(private val context: Context):
         tools: String,
         steps: String,
         nutrition: String,
+        reference: String,
         imagePath: String,
         categoryId: Int,
         userId: Int
@@ -208,6 +212,7 @@ class DatabaseHelper(private val context: Context):
             put(COLUMN_TOOLS, tools)
             put(COLUMN_STEPS, steps)
             put(COLUMN_NUTRITION_INFO, nutrition)
+            put(COLUMN_REFERENCES, reference)
             put(COLUMN_IMAGE_PATH, imagePath)
             put(COLUMN_RECIPE_CATEGORY_ID, categoryId)
             put(COLUMN_RECIPE_USER_ID, userId)
@@ -276,6 +281,7 @@ class DatabaseHelper(private val context: Context):
                     tools = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOOLS)),
                     steps = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STEPS)),
                     nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NUTRITION_INFO)),
+                    reference = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REFERENCES)),
                     imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)),
                     categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_CATEGORY_ID)),
                     userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_USER_ID))
@@ -344,6 +350,7 @@ class DatabaseHelper(private val context: Context):
                 tools = cursor.getString(cursor.getColumnIndexOrThrow("tools")),
                 steps = cursor.getString(cursor.getColumnIndexOrThrow("steps")),
                 nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow("nutrition_info")),
+                reference = cursor.getString(cursor.getColumnIndexOrThrow("reference")),
                 imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path")),
                 categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id")),
                 userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
@@ -396,6 +403,7 @@ class DatabaseHelper(private val context: Context):
                     tools = cursor.getString(cursor.getColumnIndexOrThrow("tools")),
                     steps = cursor.getString(cursor.getColumnIndexOrThrow("steps")),
                     nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow("nutrition_info")),
+                    reference = cursor.getString(cursor.getColumnIndexOrThrow("reference")),
                     imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path")),
                     categoryId = cursor.getInt(cursor.getColumnIndexOrThrow("category_id")),
                     userId = cursor.getInt(cursor.getColumnIndexOrThrow("user_id"))
@@ -434,6 +442,7 @@ class DatabaseHelper(private val context: Context):
         tools: String,
         steps: String,
         nutritionInfo: String,
+        reference: String,
         imagePath: String,
         categoryId: Int
     ): Boolean {
@@ -445,6 +454,7 @@ class DatabaseHelper(private val context: Context):
             put("$COLUMN_TOOLS", tools)
             put("$COLUMN_STEPS", steps)
             put("$COLUMN_NUTRITION_INFO", nutritionInfo)
+            put("$COLUMN_REFERENCES", reference)
             put("$COLUMN_IMAGE_PATH", imagePath)
             put("$COLUMN_RECIPE_CATEGORY_ID", categoryId)
         }

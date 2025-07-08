@@ -53,8 +53,8 @@
     <!-- Tombol Get Started -->
     <Button
         android:id="@+id/btnSignIn"
-        android:layout_width="180dp"
-        android:layout_height="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Sign In"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/green"
@@ -70,8 +70,8 @@
     <!-- Tombol Get Started -->
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="180dp"
-        android:layout_height="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Sign Up"
         android:textColor="@android:color/white"
         android:backgroundTint="@color/green"

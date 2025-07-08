@@ -77,6 +77,7 @@ class EditRecipeActivity : AppCompatActivity() {
         val inputTools = binding.inputRecipeTools
         val inputStep = binding.inputRecipeSteps
         val inputNutritionInfo = binding.inputRecipeNutritionInfo
+        val inputReference = binding.inputRecipeReferences
         val inputImagePath = binding.imagePreview
         val inputCategory = binding.categorySpinner
 
@@ -86,6 +87,7 @@ class EditRecipeActivity : AppCompatActivity() {
         inputTools.setText(recipe.tools)
         inputStep.setText(recipe.steps)
         inputNutritionInfo.setText(recipe.nutritionInfo)
+        inputReference.setText(recipe.reference)
 //        val imageFile = File(recipe.imagePath)
 //        Glide.with(this)
 //            .load(Uri.fromFile(imageFile))
@@ -138,6 +140,7 @@ class EditRecipeActivity : AppCompatActivity() {
             val tools = binding.inputRecipeTools.text.toString()
             val steps = binding.inputRecipeSteps.text.toString()
             val nutritionInfo = binding.inputRecipeNutritionInfo.text.toString()
+            val reference = binding.inputRecipeReferences.text.toString()
             val categoryName = binding.categorySpinner.selectedItem.toString()
 
             if (
@@ -147,6 +150,7 @@ class EditRecipeActivity : AppCompatActivity() {
                 tools.isBlank() ||
                 steps.isBlank() ||
                 nutritionInfo.isBlank() ||
+                reference.isBlank() ||
                 categoryName.isBlank()
             ) {
                 Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
@@ -174,6 +178,7 @@ class EditRecipeActivity : AppCompatActivity() {
                 tools,
                 steps,
                 nutritionInfo,
+                reference,
                 imagePath,
                 categoryId
             )

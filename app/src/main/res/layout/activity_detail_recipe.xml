@@ -228,6 +228,26 @@
                 android:layout_marginTop="8dp"
                 android:textStyle="bold"
                 />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reference"
+                android:textSize="20sp"
+                android:layout_marginTop="14dp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelReference"
+                android:text="link ke web"
+                android:layout_marginTop="8dp"
+                android:textColor="#348FEA"
+                android:textStyle="bold"
+                />
         </LinearLayout>
 
     </ScrollView>

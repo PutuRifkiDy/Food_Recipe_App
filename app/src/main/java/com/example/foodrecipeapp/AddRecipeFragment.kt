@@ -133,6 +133,7 @@ class AddRecipeFragment : Fragment() {
             val tools = view.findViewById<EditText>(R.id.inputRecipeTools).text.toString()
             val steps = view.findViewById<EditText>(R.id.inputRecipeSteps).text.toString()
             val nutritionInfo = view.findViewById<EditText>(R.id.inputRecipeNutritionInfo).text.toString()
+            val reference = view.findViewById<EditText>(R.id.inputRecipeReferences).text.toString()
             val categoryName = spinner.selectedItem.toString()
 
             // validasi input kosong
@@ -143,6 +144,7 @@ class AddRecipeFragment : Fragment() {
                 tools.isBlank() ||
                 steps.isBlank() ||
                 nutritionInfo.isBlank() ||
+                reference.isBlank() ||
                 categoryName == "Choose Category" ||
                 selectedImageUri == null
             ) {
@@ -184,7 +186,7 @@ class AddRecipeFragment : Fragment() {
             val imagePath = saveImageToInternalStorage(selectedImageUri!!) // simpan pathnya aja
 
             // simpan recipe ke database
-            val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, imagePath, categoryId, userId)
+            val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, reference, imagePath, categoryId, userId)
 
             if (result != -1L) {
                 Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()

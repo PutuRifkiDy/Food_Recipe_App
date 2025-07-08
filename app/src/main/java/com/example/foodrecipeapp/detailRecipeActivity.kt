@@ -1,8 +1,10 @@
 package com.example.foodrecipeapp
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract.Data
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -48,6 +50,7 @@ class detailRecipeActivity : AppCompatActivity() {
             val contentTools = binding.labelContentTools
             val contentSteps = binding.labelContentSteps
             val contentNutrition = binding.labelContentNutrition
+            val contentReference = binding.labelReference
 
             titleName.text = recipeDetail.name ?: "Uknown"
             Glide.with(this)
@@ -60,6 +63,7 @@ class detailRecipeActivity : AppCompatActivity() {
             contentTools.text = recipeDetail.tools ?: "Uknown"
             contentSteps.text = recipeDetail.steps ?: "Uknown"
             contentNutrition.text = recipeDetail.nutritionInfo ?: "Uknown"
+            contentReference.text = recipeDetail.reference ?: "Uknown"
         }
 
         binding.backButtonRecipe.setOnClickListener{
@@ -67,6 +71,16 @@ class detailRecipeActivity : AppCompatActivity() {
             intent.putExtra("navigate_to", "home")
             startActivity(intent)
             finish()
+        }
+
+        binding.labelReference.setOnClickListener {
+            val referenceUrl = recipeDetail?.reference
+            if (!referenceUrl.isNullOrBlank() && referenceUrl.startsWith("http")) {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(referenceUrl))
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Url not valid", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
