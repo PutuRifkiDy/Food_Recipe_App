@@ -791,4 +791,34 @@ class DatabaseHelper(private val context: Context):
     }
     // end update user
 
+    fun searchRecipesByName(name: String): List<Recipe> {
+        val recipes = mutableListOf<Recipe>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_RECIPE WHERE $COLUMN_RECIPE_NAME LIKE ?"
+        val cursor = db.rawQuery(query, arrayOf("%$name%"))
+
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_ID)),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_NAME)),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION)),
+                    ingredients = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INGREDIENTS)),
+                    tools = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOOLS)),
+                    steps = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STEPS)),
+                    nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NUTRITION_INFO)),
+                    reference = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REFERENCES)),
+                    imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)),
+                    categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_CATEGORY_ID)),
+                    userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_USER_ID))
+                )
+                recipes.add(recipe)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return recipes
+    }
+
+
 }

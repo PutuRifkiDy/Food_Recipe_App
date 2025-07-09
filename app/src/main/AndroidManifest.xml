@@ -25,6 +25,9 @@
             android:name=".AdminCategoryActivity"
             android:exported="false" />
         <activity
+            android:name=".FindingFoodActivity"
+            android:exported="false" />
+        <activity
             android:name=".AdminDashboardActivity"
             android:exported="false" />
         <activity

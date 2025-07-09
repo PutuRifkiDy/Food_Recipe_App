@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -44,23 +45,6 @@ class HomeFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Akses tombol More
-//        val moreButton = view.findViewById<Button>(R.id.moreTechniques)
-//        val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
-//        val cardRecipes = view.findViewById<LinearLayout>(R.id.card_nasi_goreng)
-
-        // Intent ke CookingTechniquesActivity
-//        moreButton.setOnClickListener {
-//            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
-//            startActivity(intent)
-//        }
-//
-//        // intent ke cooking techniques
-//        moreButton1.setOnClickListener {
-//            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
-//            startActivity(intent)
-//        }
-
         // akses text view, mengambil user login dari share prefrences
         val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
         val userName = sharedPref.getString("user_name", "Guest")
@@ -68,6 +52,12 @@ class HomeFragment : Fragment() {
         // set text viewnya
         val greetingTextView = view.findViewById<TextView>(R.id.greetingName)
         greetingTextView.text = "Welcome, $userName!"
+
+        val editTextSearchBar = view.findViewById<EditText>(R.id.searchNameRecipe)
+        editTextSearchBar.setOnClickListener {
+            val intent = Intent(requireContext(), FindingFoodActivity::class.java)
+            startActivity(intent)
+        }
 
         // ambil semua category
         val dbHelper = DatabaseHelper(requireContext())
