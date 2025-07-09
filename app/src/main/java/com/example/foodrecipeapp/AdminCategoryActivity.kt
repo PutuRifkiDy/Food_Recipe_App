@@ -51,6 +51,11 @@ class AdminCategoryActivity : AppCompatActivity() {
             showCategoryDialog(null)
         }
 
+        binding.backButtonManageCategory.setOnClickListener {
+            val intent = Intent(this, AdminDashboardActivity::class.java)
+            startActivity(intent)
+        }
+
         // ambil semua category
         val dbHelper = DatabaseHelper(this)
         val categoryList = dbHelper.getAllCategories()
