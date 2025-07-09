@@ -35,6 +35,14 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_CATEGORY_NAME = "category_name"
         private const val COLUMN_ICON_PATH = "icon_path"
 
+        // table cooking techniques
+        private const val TABLE_COOKING_TECHNIQUE = "cooking_technique"
+        private const val COLUMN_COOKING_TECHNIQUE_ID = "id"
+        private const val COLUMN_COOKING_TECHNIQUE_TITLE = "title"
+        private const val COLUMN_COOKING_TECHNIQUE_IMAGE_PATH = "image_path"
+        private const val COLUMN_COOKING_TECHNIQUE_DESCRIPTION = "description"
+        private const val COLUMN_COOKING_TECHNIQUE_METHOD = "method"
+
         // table recipe
         private const val TABLE_RECIPE = "recipe"
         private const val COLUMN_RECIPE_ID = "id"
@@ -78,7 +86,18 @@ class DatabaseHelper(private val context: Context):
             CREATE TABLE $TABLE_CATEGORY (
                 $COLUMN_CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_CATEGORY_NAME TEXT,
-                $COLUMN_ICON_PATH
+                $COLUMN_ICON_PATH TEXT
+            )
+        """.trimIndent()
+
+        // table cooking technique
+        val createCookingTechnique = """
+            CREATE TABLE $TABLE_COOKING_TECHNIQUE (
+                $COLUMN_COOKING_TECHNIQUE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_COOKING_TECHNIQUE_TITLE TEXT,
+                $COLUMN_IMAGE_PATH TEXT,
+                $COLUMN_COOKING_TECHNIQUE_DESCRIPTION TEXT,
+                $COLUMN_COOKING_TECHNIQUE_METHOD TEXT,
             )
         """.trimIndent()
 
@@ -113,6 +132,7 @@ class DatabaseHelper(private val context: Context):
 
         db?.execSQL(createUserTable)
         db?.execSQL(createCategoryTable)
+        db?.execSQL(createCookingTechnique)
         db?.execSQL(createRecipeTable)
         db?.execSQL(insertAdmin)
     }
