@@ -1,6 +1,7 @@
 package com.example.foodrecipeapp
 
 import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -60,12 +61,6 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        // intent ke detail recipes
-//        cardRecipes.setOnClickListener{
-//            val intent = Intent(requireContext(), detailRecipeActivity::class.java)
-//            startActivity(intent)
-//        }
-
         // akses text view, mengambil user login dari share prefrences
         val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
         val userName = sharedPref.getString("user_name", "Guest")
@@ -74,8 +69,31 @@ class HomeFragment : Fragment() {
         val greetingTextView = view.findViewById<TextView>(R.id.greetingName)
         greetingTextView.text = "Welcome, $userName!"
 
-        // ambil remua recipe
+        // ambil semua category
         val dbHelper = DatabaseHelper(requireContext())
+        val categoryList = dbHelper.getAllCategories()
+        val containerCategory = view.findViewById<LinearLayout>(R.id.container_category)
+
+        for(category in categoryList) {
+            val cardViewCategory = layoutInflater.inflate(R.layout.item_category_home, null)
+            val tvCategoryName = cardViewCategory.findViewById<TextView>(R.id.labelIconCategory)
+            val ivCategory = cardViewCategory.findViewById<ImageView>(R.id.icon_path_category)
+
+            tvCategoryName.text = category.category_name
+            Glide.with(this)
+                .load(category.iconPath)
+                .into(ivCategory)
+
+            containerCategory.addView(cardViewCategory)
+
+            cardViewCategory.setOnClickListener{
+                val intent = Intent(requireContext(), RecipeCategoryFilterActivity::class.java)
+                intent.putExtra("category_id", category.id)
+                startActivity(intent)
+            }
+        }
+
+        // ambil remua recipe
         val recipeList = dbHelper.getAllRecipe()
         val containerComponent = view.findViewById<LinearLayout>(R.id.container_recipe)
         containerComponent.removeAllViews()
@@ -107,6 +125,7 @@ class HomeFragment : Fragment() {
             }
 
         }
+
         return view
     }
 

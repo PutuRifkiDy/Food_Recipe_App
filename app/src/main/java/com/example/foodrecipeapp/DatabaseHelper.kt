@@ -521,4 +521,40 @@ class DatabaseHelper(private val context: Context):
     }
     // end update category
 
+    // start getRecipeByCategoryId
+    fun getRecipeByCategoryId(categoryId: Int): List<Recipe> {
+        val recipes = mutableListOf<Recipe>()
+        val db = readableDatabase
+        val cursor = db.query(
+            TABLE_RECIPE,
+            null,
+            "$COLUMN_RECIPE_CATEGORY_ID = ?",
+            arrayOf(categoryId.toString()),
+            null,
+            null,
+            null
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val recipe = Recipe(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_ID)),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_NAME)),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DESCRIPTION)),
+                    ingredients = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INGREDIENTS)),
+                    tools = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TOOLS)),
+                    steps = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STEPS)),
+                    nutritionInfo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NUTRITION_INFO)),
+                    reference = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_REFERENCES)),
+                    imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE_PATH)),
+                    categoryId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_CATEGORY_ID)),
+                    userId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_RECIPE_USER_ID))
+                )
+                recipes.add(recipe)
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return recipes
+    }
+
 }

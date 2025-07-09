@@ -3,6 +3,7 @@ package com.example.foodrecipeapp
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract.Data
 import android.provider.ContactsContract.Profile
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -37,7 +38,6 @@ class AddRecipeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var databaseHelper: DatabaseHelper
     private var selectedImageUri: Uri? = null
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
@@ -84,36 +84,24 @@ class AddRecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val dbHelper = DatabaseHelper(requireContext())
 
         // Ambil referensi Spinner
         val spinner = view.findViewById<Spinner>(R.id.categorySpinner)
         // Data kategori
-        val categories = listOf("Choose Category", "Vegetable", "Meat", "Drink", "Seafood", "Snack")
-
+        val categoryList = dbHelper.getAllCategories()
+        val categoryNames = mutableListOf("Choose Category") // tambahkan default pilihan
+        categoryNames.addAll(categoryList.map { it.category_name })
 
         // Adapter untuk mengisi data ke spinner
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
-            categories
+            categoryNames
         )
-
         // Set adapter ke spinner
         spinner.adapter = adapter
 
-        // Optional: aksi saat item dipilih
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>, view: View, position: Int, id: Long
-            ) {
-                val selected = categories[position]
-                // Lakukan sesuatu jika kategori dipilih
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Jika tidak ada yang dipilih
-            }
-        }
 
         // Upload Gambar
         val uploadContainer = view.findViewById<LinearLayout>(R.id.uploadContainer)
@@ -125,7 +113,6 @@ class AddRecipeFragment : Fragment() {
 
         // proses insert recipe
         val addButton = view.findViewById<Button>(R.id.addRecipeButton)
-        databaseHelper = DatabaseHelper(requireContext())
         addButton.setOnClickListener{
             val name = view.findViewById<EditText>(R.id.inputRecipeName).text.toString()
             val description = view.findViewById<EditText>(R.id.inputRecipeDescription).text.toString()
@@ -162,7 +149,7 @@ class AddRecipeFragment : Fragment() {
             }
 
             // ambil ID Kategori dari nama kategori
-            val categoryId = databaseHelper.getOrInsertCategory(categoryName)
+            val categoryId = dbHelper.getOrInsertCategory(categoryName)
 
             if (categoryId == -1) {
                 Toast.makeText(context, "Invalid category", Toast.LENGTH_SHORT).show()
@@ -186,7 +173,7 @@ class AddRecipeFragment : Fragment() {
             val imagePath = saveImageToInternalStorage(selectedImageUri!!) // simpan pathnya aja
 
             // simpan recipe ke database
-            val result = databaseHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, reference, imagePath, categoryId, userId)
+            val result = dbHelper.insertRecipe(name, description, ingredients, tools, steps, nutritionInfo, reference, imagePath, categoryId, userId)
 
             if (result != -1L) {
                 Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()
