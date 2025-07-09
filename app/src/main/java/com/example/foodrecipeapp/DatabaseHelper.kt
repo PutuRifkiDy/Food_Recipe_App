@@ -15,7 +15,7 @@ class DatabaseHelper(private val context: Context):
     // start declare constanta
     companion object {
         private const val DATABASE_NAME = "FoodRecipe.db"
-        private const val DATABASE_VERSION = 6
+        private const val DATABASE_VERSION = 8
 
         // table user
         private const val TABLE_USER = "user"

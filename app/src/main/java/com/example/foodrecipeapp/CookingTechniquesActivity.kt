@@ -1,20 +1,32 @@
 package com.example.foodrecipeapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.foodrecipeapp.databinding.ActivityCookingTechniquesActivityBinding
 
 class CookingTechniquesActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCookingTechniquesActivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_cooking_techniques_activity)
+
+        binding = ActivityCookingTechniquesActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.backButtonTechniques.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("navigate_to", "home")
+            startActivity(intent)
         }
     }
 }
