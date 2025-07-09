@@ -158,6 +158,10 @@ class AdminCookingTechniquesActivity : AppCompatActivity() {
                 val title = etTitle.text.toString().trim()
                 val description = etDescription.text.toString().trim()
                 val method = etMethod.text.toString().trim()
+                val imagePath = when {
+                    selectedImageUri != null -> saveImageToInternalStorage(selectedImageUri!!)
+                    else -> cookingTechnique?.imagePath ?: ""
+                }
 
                 if (title.isEmpty() ||
                     (cookingTechnique == null && selectedImageUri == null) ||
@@ -168,13 +172,8 @@ class AdminCookingTechniquesActivity : AppCompatActivity() {
                     return@setPositiveButton
                 }
 
-                val imagePath = when {
-                    selectedImageUri != null -> saveImageToInternalStorage(selectedImageUri!!)
-                    else -> cookingTechnique?.imagePath ?: ""
-                }
-
                 if (isEditing) {
-                    val updatedCookingTechnique = CookingTechnique(cookingTechnique!!.id, title, description, method, imagePath)
+                    val updatedCookingTechnique = CookingTechnique(cookingTechnique!!.id, title, imagePath, description, method)
                     val success = dbHelper.updateCookingTechnique(updatedCookingTechnique)
                     if (success) {
                         Toast.makeText(this, "Cooking Technique updated!", Toast.LENGTH_SHORT).show()

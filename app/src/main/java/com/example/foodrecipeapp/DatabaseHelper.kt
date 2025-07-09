@@ -644,6 +644,28 @@ class DatabaseHelper(private val context: Context):
         db.close()
         return cookingTechniqueList
     }
-    // end get all cooking technique
+    // start get detail cooking technique berdasarkan id
+    fun getCookingTechniqueById(id: Int): CookingTechnique? {
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_COOKING_TECHNIQUE WHERE id = ?", arrayOf(id.toString()))
+
+        var cookingTechniq: CookingTechnique? = null
+
+        if (cursor.moveToFirst()) {
+            cookingTechniq = CookingTechnique(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_COOKING_TECHNIQUE_ID)),
+                title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COOKING_TECHNIQUE_TITLE)),
+                imagePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COOKING_TECHNIQUE_IMAGE_PATH)),
+                description = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COOKING_TECHNIQUE_DESCRIPTION)),
+                method = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_COOKING_TECHNIQUE_METHOD))
+            )
+        }
+
+        cursor.close()
+        db.close()
+
+        return cookingTechniq
+    }
+    // end get detail cooking technique berdasarkan id
 
 }

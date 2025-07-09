@@ -45,21 +45,21 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         // Akses tombol More
-        val moreButton = view.findViewById<Button>(R.id.moreTechniques)
-        val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
+//        val moreButton = view.findViewById<Button>(R.id.moreTechniques)
+//        val moreButton1 = view.findViewById<Button>(R.id.moreTechniques1)
 //        val cardRecipes = view.findViewById<LinearLayout>(R.id.card_nasi_goreng)
 
         // Intent ke CookingTechniquesActivity
-        moreButton.setOnClickListener {
-            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
-            startActivity(intent)
-        }
-
-        // intent ke cooking techniques
-        moreButton1.setOnClickListener {
-            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
-            startActivity(intent)
-        }
+//        moreButton.setOnClickListener {
+//            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        // intent ke cooking techniques
+//        moreButton1.setOnClickListener {
+//            val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // akses text view, mengambil user login dari share prefrences
         val sharedPref = requireContext().getSharedPreferences("UserSession", android.content.Context.MODE_PRIVATE)
@@ -124,6 +124,45 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
+        }
+
+        // ambil semua cooking technique
+        val cookingTechniqueList = dbHelper.getAllCookingTechnique()
+        val containerCookingTechnique = view.findViewById<LinearLayout>(R.id.containerCookingTechnique)
+        containerComponent.removeAllViews()
+
+        for(cookingTechnique in cookingTechniqueList) {
+            val cardView = layoutInflater.inflate(R.layout.item_cooking_technique_home, null)
+
+            val tvTitleCookingTechnique =
+                cardView.findViewById<TextView>(R.id.methodCookingTechnique)
+            val tvDescriptionCookingTechnique =
+                cardView.findViewById<TextView>(R.id.descriptionCookingTechnique)
+            val image = cardView.findViewById<ImageView>(R.id.imageCookingTechnique)
+            val btnMoreDetail = cardView.findViewById<Button>(R.id.btnMoreCookingTechnique)
+
+            tvTitleCookingTechnique.text = cookingTechnique.title
+            tvDescriptionCookingTechnique.text = cookingTechnique.description
+            Glide.with(this)
+                .load(cookingTechnique.imagePath)
+                .into(image)
+
+            // kasi gap
+            val layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.bottomMargin = 16
+
+            // menampilkan cardnya semua
+            cardView.layoutParams = layoutParams
+            containerCookingTechnique.addView(cardView)
+
+            btnMoreDetail.setOnClickListener {
+                val intent = Intent(requireContext(), CookingTechniquesActivity::class.java)
+                intent.putExtra("cooking_technique_id", cookingTechnique.id)
+                startActivity(intent)
+            }
         }
 
         return view
