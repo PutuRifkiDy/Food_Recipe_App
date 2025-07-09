@@ -4,7 +4,9 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import androidx.core.content.contentValuesOf
 import com.example.foodrecipeapp.model.Category
+import com.example.foodrecipeapp.model.CookingTechnique
 import com.example.foodrecipeapp.model.Recipe
 import com.example.foodrecipeapp.model.User
 import java.lang.ref.Reference
@@ -15,7 +17,7 @@ class DatabaseHelper(private val context: Context):
     // start declare constanta
     companion object {
         private const val DATABASE_NAME = "FoodRecipe.db"
-        private const val DATABASE_VERSION = 8
+        private const val DATABASE_VERSION = 9
 
         // table user
         private const val TABLE_USER = "user"
@@ -34,6 +36,14 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_CATEGORY_ID = "id"
         private const val COLUMN_CATEGORY_NAME = "category_name"
         private const val COLUMN_ICON_PATH = "icon_path"
+
+        // table cooking techniques
+        private const val TABLE_COOKING_TECHNIQUE = "cooking_technique"
+        private const val COLUMN_COOKING_TECHNIQUE_ID = "id"
+        private const val COLUMN_COOKING_TECHNIQUE_TITLE = "title"
+        private const val COLUMN_COOKING_TECHNIQUE_IMAGE_PATH = "image_path"
+        private const val COLUMN_COOKING_TECHNIQUE_DESCRIPTION = "description"
+        private const val COLUMN_COOKING_TECHNIQUE_METHOD = "method"
 
         // table recipe
         private const val TABLE_RECIPE = "recipe"
@@ -78,7 +88,18 @@ class DatabaseHelper(private val context: Context):
             CREATE TABLE $TABLE_CATEGORY (
                 $COLUMN_CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COLUMN_CATEGORY_NAME TEXT,
-                $COLUMN_ICON_PATH
+                $COLUMN_ICON_PATH TEXT
+            )
+        """.trimIndent()
+
+        // table cooking technique
+        val createCookingTechnique = """
+            CREATE TABLE $TABLE_COOKING_TECHNIQUE (
+                $COLUMN_COOKING_TECHNIQUE_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_COOKING_TECHNIQUE_TITLE TEXT,
+                $COLUMN_COOKING_TECHNIQUE_IMAGE_PATH TEXT,
+                $COLUMN_COOKING_TECHNIQUE_DESCRIPTION TEXT,
+                $COLUMN_COOKING_TECHNIQUE_METHOD TEXT
             )
         """.trimIndent()
 
@@ -113,6 +134,7 @@ class DatabaseHelper(private val context: Context):
 
         db?.execSQL(createUserTable)
         db?.execSQL(createCategoryTable)
+        db?.execSQL(createCookingTechnique)
         db?.execSQL(createRecipeTable)
         db?.execSQL(insertAdmin)
     }
@@ -556,5 +578,72 @@ class DatabaseHelper(private val context: Context):
         cursor.close()
         return recipes
     }
+    // end get recipe by category id
+
+    // start insert cooking technique
+    fun insertCookingTechnique(title: String,imagePath: String, description: String, method: String): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_COOKING_TECHNIQUE_TITLE, title)
+            put(COLUMN_COOKING_TECHNIQUE_DESCRIPTION, description)
+            put(COLUMN_COOKING_TECHNIQUE_METHOD, method)
+            put(COLUMN_COOKING_TECHNIQUE_IMAGE_PATH, imagePath)
+        }
+
+        val result = db.insert(TABLE_COOKING_TECHNIQUE, null, values)
+        return result
+    }
+    // end insert cooking technique
+
+    // start delete Cooking technique By Id
+    fun deleteCookingTechnique(cookingTechniqueId: Int): Boolean {
+        val db = writableDatabase
+        val result = db.delete(TABLE_COOKING_TECHNIQUE, "id = ?", arrayOf(cookingTechniqueId.toString()))
+        db.close()
+        return result > 0
+    }
+    // end delete cooking technique by id
+
+    // start update cooking technique By id
+    fun updateCookingTechnique(cookingTechnique: CookingTechnique): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_COOKING_TECHNIQUE_TITLE, cookingTechnique.title)
+            put(COLUMN_COOKING_TECHNIQUE_DESCRIPTION, cookingTechnique.description)
+            put(COLUMN_COOKING_TECHNIQUE_METHOD, cookingTechnique.method)
+            put(COLUMN_COOKING_TECHNIQUE_IMAGE_PATH, cookingTechnique.imagePath)
+        }
+
+        val result = db.update(TABLE_COOKING_TECHNIQUE, values, "id = ?", arrayOf(cookingTechnique.id.toString()))
+        db.close()
+        return result > 0
+    }
+    // end update cooking technique By id
+
+    // start get all cooking technique
+    fun getAllCookingTechnique(): List<CookingTechnique> {
+        val cookingTechniqueList = mutableListOf<CookingTechnique>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_COOKING_TECHNIQUE"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val cookingTechnique = CookingTechnique(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    description = cursor.getString(cursor.getColumnIndexOrThrow("description")),
+                    method = cursor.getString(cursor.getColumnIndexOrThrow("method")),
+                    imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image_path"))
+                )
+                cookingTechniqueList.add(cookingTechnique)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return cookingTechniqueList
+    }
+    // end get all cooking technique
 
 }

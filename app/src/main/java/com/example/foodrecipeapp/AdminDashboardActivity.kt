@@ -2,6 +2,7 @@ package com.example.foodrecipeapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,6 +23,20 @@ class AdminDashboardActivity : AppCompatActivity() {
             insets
         }
 
+        // fungsi logout
+        fun logoutUser() {
+            val sharedPref = getSharedPreferences("UserSession", MODE_PRIVATE)
+            val editor = sharedPref.edit()
+            editor.clear()
+            editor.remove("is_guest")
+            editor.apply()
+
+            Toast.makeText(this, "Logout Successfull", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LandingPageActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         // intent ke activity masing masing
         binding.btnManageCategory.setOnClickListener{
             val intent = Intent(this, AdminCategoryActivity::class.java)
@@ -36,6 +51,10 @@ class AdminDashboardActivity : AppCompatActivity() {
         binding.btnManageTechniques.setOnClickListener{
             val intent = Intent(this, AdminCookingTechniquesActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnLogoutAdmin.setOnClickListener {
+            logoutUser()
         }
     }
 }
