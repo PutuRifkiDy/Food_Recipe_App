@@ -54,7 +54,7 @@
                 android:id="@+id/btnSeeMoreUser"
                 android:layout_width="100dp"
                 android:layout_height="35dp"
-                android:text="Delete"
+                android:text="Detail"
                 android:textSize="11sp"
                 android:textColor="@android:color/white"
                 android:backgroundTint="@color/blue"

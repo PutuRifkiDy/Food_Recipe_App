@@ -823,20 +823,20 @@ class DatabaseHelper(private val context: Context):
     fun getUserByUserId(userId: Int): User? {
         val db = this.readableDatabase
         var user: User? = null
-        val query = "SELECT * FROM users WHERE id = ?"
+        val query = "SELECT * FROM $TABLE_USER WHERE id = ?"
         val cursor = db.rawQuery(query, arrayOf(userId.toString()))
 
         if (cursor.moveToFirst()) {
             user = User(
                 id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                 name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
-                phone = cursor.getString(cursor.getColumnIndexOrThrow("phone")),
+                phone = cursor.getString(cursor.getColumnIndexOrThrow("phone_number")),
                 email = cursor.getString(cursor.getColumnIndexOrThrow("email")),
                 password = cursor.getString(cursor.getColumnIndexOrThrow("password")),
                 about = cursor.getString(cursor.getColumnIndexOrThrow("about")),
                 gender = cursor.getString(cursor.getColumnIndexOrThrow("gender")),
                 birthday = cursor.getString(cursor.getColumnIndexOrThrow("birthday")),
-                isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("isAdmin")) == 1
+                isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("is_admin")) == 1
             )
         }
 
