@@ -124,9 +124,9 @@ class DatabaseHelper(private val context: Context):
         val dropTableCategory = "DROP TABLE IF EXISTS $TABLE_CATEGORY"
         val dropTableRecipe = "DROP TABLE IF EXISTS $TABLE_RECIPE"
 
-        db?.execSQL(dropTableUser)
-        db?.execSQL(dropTableCategory)
         db?.execSQL(dropTableRecipe)
+        db?.execSQL(dropTableCategory)
+        db?.execSQL(dropTableUser)
 
         onCreate(db)
     }
