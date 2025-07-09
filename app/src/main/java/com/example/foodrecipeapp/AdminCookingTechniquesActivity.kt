@@ -74,8 +74,8 @@ class AdminCookingTechniquesActivity : AppCompatActivity() {
             val image = cardView.findViewById<ImageView>(R.id.ivCookingTechnique)
 
             tvTitleCookingTechnique.text = cookingTechnique.title
-            tvMethodCookingTechnique.text = cookingTechnique.method
-            tvDescriptionCookingTechnique.text = cookingTechnique.description
+//            tvMethodCookingTechnique.text = cookingTechnique.method
+//            tvDescriptionCookingTechnique.text = cookingTechnique.description
             Glide.with(this)
                 .load(cookingTechnique.imagePath)
                 .into(image)
