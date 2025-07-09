@@ -667,20 +667,44 @@ class DatabaseHelper(private val context: Context):
         return cookingTechniq
     }
     // end get detail cooking technique berdasarkan
-//    fun countRecipeByUserId(userId: Int): Int {
-//        val db = readableDatabase
-//        val query = "SELECT COUNT(*) FROM recipe WHERE user_id = ?"
-//        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
-//        var count = 0
-//
-//        if (cursor.moveToFirst()) {
-//            count = cursor.getInt(0)
-//        }
-//
-//        cursor.close()
-//        db.close()
-//        return count
-//    }
+
+    fun getAllUser(): List<User> {
+        val userList = mutableListOf<User>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_USER"
+        val cursor = db.rawQuery(query, null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val user = User(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    name = cursor.getString(cursor.getColumnIndexOrThrow("name")),
+                    phone = cursor.getString(cursor.getColumnIndexOrThrow("phone_number")),
+                    email = cursor.getString(cursor.getColumnIndexOrThrow("email")),
+                    password = cursor.getString(cursor.getColumnIndexOrThrow("password")),
+                    about = cursor.getString(cursor.getColumnIndexOrThrow("about")),
+                    gender = cursor.getString(cursor.getColumnIndexOrThrow("gender")),
+                    birthday = cursor.getString(cursor.getColumnIndexOrThrow("birthday")),
+                    isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("is_admin")) == 1
+                )
+
+                userList.add(user)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+
+        return userList
+    }
+
+    fun deleteUserById(userId: Int): Boolean {
+        val db = writableDatabase
+        val result = db.delete(TABLE_USER, "id = ?", arrayOf(userId.toString()))
+        db.close()
+        return result > 0
+    }
+
     // start count category
     fun countCategory(): Int {
         val db = readableDatabase
@@ -730,5 +754,41 @@ class DatabaseHelper(private val context: Context):
         return count_user
     }
     // end count user
+
+    // insert user all
+    fun insertUserInAdmin(name: String, phone: String, email: String, password: String, about: String, gender: String, birthday: String): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_NAME, name)
+            put(COLUMN_PHONE, phone)
+            put(COLUMN_EMAIL, email)
+            put(COLUMN_PASSWORD, password)
+            put(COLUMN_ABOUT, about)
+            put(COLUMN_GENDER, gender)
+            put(COLUMN_BIRTHDAY, birthday)
+        }
+
+        val result = db.insert(TABLE_USER, null, values)
+        return result
+    }
+    // end insert user all
+
+    // start update user
+    fun updateUser(user: User?): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_NAME, user?.name)
+            put(COLUMN_PHONE, user?.phone)
+            put(COLUMN_EMAIL, user?.email)
+            put(COLUMN_ABOUT, user?.about)
+            put(COLUMN_GENDER, user?.gender)
+            put(COLUMN_BIRTHDAY, user?.birthday)
+        }
+
+        val result = db.update(TABLE_USER, values, "id = ?", arrayOf(user?.id.toString()))
+        db.close()
+        return result > 0
+    }
+    // end update user
 
 }
