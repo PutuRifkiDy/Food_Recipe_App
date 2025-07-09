@@ -5,46 +5,174 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginVertical="12dp"
     tools:context=".AdminDashboardActivity">
+
+    <!-- Profile Image -->
+    <ImageView
+        android:id="@+id/adminProfileImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:contentDescription="Admin Profile"
+        android:src="@drawable/icon_profile_temporary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Greeting Text -->
+    <TextView
+        android:id="@+id/adminGreeting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="12dp"
+        android:text="Hello, Admin"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/adminProfileImage"
+        app:layout_constraintStart_toEndOf="@id/adminProfileImage"
+        app:layout_constraintTop_toTopOf="@id/adminProfileImage" />
+
+    <!-- Total Categories Section -->
+    <ImageView
+        android:id="@+id/iconCategory"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adminProfileImage" />
+
+    <TextView
+        android:id="@+id/tvTotalCategories"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Total Categories : -"
+        android:textStyle="bold"
+        android:paddingTop="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iconCategory"
+        app:layout_constraintTop_toTopOf="@id/iconCategory" />
 
     <Button
         android:id="@+id/btnManageCategory"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/green"
         android:text="Manage Categories"
-        android:layout_marginHorizontal="8dp"
-        android:backgroundTint="#1977F3"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/iconCategory" />
+
+    <!-- Total Recipe Section -->
+    <ImageView
+        android:id="@+id/iconRecipe"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_recipe"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnManageCategory" />
+
+    <TextView
+        android:id="@+id/tvTotalTechniques"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Total Techniques : -"
+        android:paddingTop="6dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iconRecipe"
+        app:layout_constraintTop_toTopOf="@id/iconRecipe" />
 
     <Button
         android:id="@+id/btnManageTechniques"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/green"
         android:text="Manage Techniques"
-        android:layout_marginHorizontal="8dp"
-        android:padding="16dp"
-        android:backgroundTint="#1977F3"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/btnManageCategory"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconRecipe" />
+
+    <!-- Total User Section -->
+    <ImageView
+        android:id="@+id/iconUser"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_userprofile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnManageTechniques" />
+
+    <TextView
+        android:id="@+id/tvTotalUser"
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="Total User : -"
+        android:paddingTop="6dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iconUser"
+        app:layout_constraintTop_toTopOf="@id/iconUser" />
 
     <Button
         android:id="@+id/btnManageUsers"
+        android:layout_marginHorizontal="20dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Manage Users"
-        android:layout_marginHorizontal="8dp"
-        android:padding="16dp"
-        android:backgroundTint="#1977F3"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/green"
+        android:text="Manage User"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/btnManageTechniques"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconUser" />
+
+    <LinearLayout
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnManageUsers">
+
+        <ImageView
+            android:id="@+id/iconLogout"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="Logout Icon"
+            android:src="@drawable/ic_logout"
+            app:tint="@color/red" />
+
+        <TextView
+            android:id="@+id/textLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log Out"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
