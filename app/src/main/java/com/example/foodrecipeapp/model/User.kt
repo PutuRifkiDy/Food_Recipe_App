@@ -8,5 +8,6 @@ data class User(
     val password: String,
     val about: String?,
     val gender: String?,
-    val birthday: String?
+    val birthday: String?,
+    val isAdmin: Boolean
 )

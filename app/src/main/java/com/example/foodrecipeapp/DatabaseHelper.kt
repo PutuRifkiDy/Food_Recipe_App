@@ -15,7 +15,7 @@ class DatabaseHelper(private val context: Context):
     // start declare constanta
     companion object {
         private const val DATABASE_NAME = "FoodRecipe.db"
-        private const val DATABASE_VERSION = 3
+        private const val DATABASE_VERSION = 6
 
         // table user
         private const val TABLE_USER = "user"
@@ -27,11 +27,13 @@ class DatabaseHelper(private val context: Context):
         private const val COLUMN_ABOUT = "about"
         private const val COLUMN_GENDER = "gender"
         private const val COLUMN_BIRTHDAY = "birthday"
+        private const val IS_ADMIN = "is_admin"
 
         // table category recipe
         private const val TABLE_CATEGORY = "category_recipe"
         private const val COLUMN_CATEGORY_ID = "id"
         private const val COLUMN_CATEGORY_NAME = "category_name"
+        private const val COLUMN_ICON_PATH = "icon_path"
 
         // table recipe
         private const val TABLE_RECIPE = "recipe"
@@ -49,6 +51,11 @@ class DatabaseHelper(private val context: Context):
     }
     // end declare constanta
 
+    override fun onConfigure(db: SQLiteDatabase) {
+        // Aktifkan foreign key constraint di SQLite Android
+        db.setForeignKeyConstraintsEnabled(true)
+    }
+
     // start create table
     override fun onCreate(db: SQLiteDatabase?) {
         // table user
@@ -61,7 +68,8 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_PASSWORD TEXT,
                 $COLUMN_ABOUT TEXT,
                 $COLUMN_GENDER TEXT,
-                $COLUMN_BIRTHDAY TEXT
+                $COLUMN_BIRTHDAY TEXT,
+                $IS_ADMIN INTEGER DEFAULT 0
             )
         """.trimIndent()
 
@@ -69,7 +77,8 @@ class DatabaseHelper(private val context: Context):
         val createCategoryTable = """
             CREATE TABLE $TABLE_CATEGORY (
                 $COLUMN_CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                $COLUMN_CATEGORY_NAME TEXT
+                $COLUMN_CATEGORY_NAME TEXT,
+                $COLUMN_ICON_PATH
             )
         """.trimIndent()
 
@@ -87,14 +96,25 @@ class DatabaseHelper(private val context: Context):
                 $COLUMN_IMAGE_PATH TEXT,
                 $COLUMN_RECIPE_CATEGORY_ID INTEGER,
                 $COLUMN_RECIPE_USER_ID INTEGER,
-                FOREIGN KEY ($COLUMN_RECIPE_CATEGORY_ID) REFERENCES $TABLE_CATEGORY($COLUMN_CATEGORY_ID),
-                FOREIGN KEY ($COLUMN_RECIPE_USER_ID) REFERENCES $TABLE_USER($COLUMN_USER_ID)
+                FOREIGN KEY ($COLUMN_RECIPE_CATEGORY_ID) REFERENCES $TABLE_CATEGORY($COLUMN_CATEGORY_ID) ON DELETE CASCADE,
+                FOREIGN KEY ($COLUMN_RECIPE_USER_ID) REFERENCES $TABLE_USER($COLUMN_USER_ID) ON DELETE CASCADE
+            )
+        """.trimIndent()
+
+        val insertAdmin = """
+            INSERT INTO $TABLE_USER (
+                $COLUMN_NAME, $COLUMN_PHONE, $COLUMN_EMAIL, $COLUMN_PASSWORD,
+                $COLUMN_ABOUT, $COLUMN_GENDER, $COLUMN_BIRTHDAY, $IS_ADMIN
+            ) VALUES (
+                'Admin', '081234567890', 'admin@gmail.com', 'admin123',
+                'Default admin account', 'Other', '11-07-2005', 1
             )
         """.trimIndent()
 
         db?.execSQL(createUserTable)
         db?.execSQL(createCategoryTable)
         db?.execSQL(createRecipeTable)
+        db?.execSQL(insertAdmin)
     }
     // end create table
 
@@ -184,7 +204,8 @@ class DatabaseHelper(private val context: Context):
                 password = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PASSWORD)),
                 about = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ABOUT)),
                 gender = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_GENDER)),
-                birthday = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDAY))
+                birthday = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDAY)),
+                isAdmin = cursor.getInt(cursor.getColumnIndexOrThrow("is_admin")) == 1
             )
         }
 
@@ -375,7 +396,8 @@ class DatabaseHelper(private val context: Context):
             do {
                 val category = Category(
                     id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
-                    category_name = cursor.getString(cursor.getColumnIndexOrThrow("category_name"))
+                    category_name = cursor.getString(cursor.getColumnIndexOrThrow("category_name")),
+                    iconPath = cursor.getString(cursor.getColumnIndexOrThrow("icon_path"))
                 )
                 categoryList.add(category)
             } while (cursor.moveToNext())
@@ -462,5 +484,41 @@ class DatabaseHelper(private val context: Context):
         val result = db.update("$TABLE_RECIPE", values, "id = ?", arrayOf(id.toString()))
         return result > 0
     }
+    // end update recipe
+
+    // start insert category
+    fun insertCategory(name: String, iconPath: String): Long {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_CATEGORY_NAME, name)
+            put(COLUMN_ICON_PATH, iconPath)
+        }
+
+        val result = db.insert(TABLE_CATEGORY, null, values)
+        return result
+    }
+    // end insert category
+
+    // start delete category berdasarkan id category
+    fun deleteCategoryById(categoryId: Int): Boolean {
+        val db = writableDatabase
+        val result = db.delete(TABLE_CATEGORY, "id = ?", arrayOf(categoryId.toString()))
+        db.close()
+        return result > 0
+    }
+    // end delete category berdasarkan id category
+
+    // start update category
+    fun updateCategory(category: Category): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put("category_name", category.category_name)
+            put("icon_path", category.iconPath)
+        }
+        val result = db.update("category_recipe", values, "id = ?", arrayOf(category.id.toString()))
+        db.close()
+        return result > 0
+    }
+    // end update category
 
 }

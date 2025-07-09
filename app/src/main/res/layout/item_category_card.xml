@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_recipe"
+    android:layout_marginTop="16dp"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="12dp">
+
+    <ImageView
+        android:id="@+id/ivcategoryIcon"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:src="@drawable/content_food"
+        android:scaleType="centerCrop"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingStart="16dp">
+
+        <TextView
+            android:id="@+id/tvCategoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Judul Category"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+
+        <!-- Edit and Delete Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnEditCategory"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:backgroundTint="#4D7CFE"
+                android:text="Edit"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+
+            <Button
+                android:id="@+id/btnDeleteCategory"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#FF5656"
+                android:text="Delete"
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

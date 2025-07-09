@@ -79,14 +79,21 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString("user_gender", user.gender)
                 editor.putString("user_birthday", user.birthday)
                 editor.putBoolean("is_guest", false)
+                editor.putBoolean("is_admin", user.isAdmin)
                 editor.apply()
             }
 
-
-            Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            if (user?.isAdmin == true) {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, AdminDashboardActivity::class.java)
+                startActivity(intent)
+            } else {
+                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
             finish()
+
         } else {
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
         }

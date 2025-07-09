@@ -88,7 +88,7 @@ class AddRecipeFragment : Fragment() {
         // Ambil referensi Spinner
         val spinner = view.findViewById<Spinner>(R.id.categorySpinner)
         // Data kategori
-        val categories = listOf("Choose Category", "Breakfast", "Lunch", "Dinner", "Dessert")
+        val categories = listOf("Choose Category", "Vegetable", "Meat", "Drink", "Seafood", "Snack")
 
 
         // Adapter untuk mengisi data ke spinner
