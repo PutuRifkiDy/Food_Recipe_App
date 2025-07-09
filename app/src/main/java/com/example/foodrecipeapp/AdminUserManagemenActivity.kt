@@ -87,11 +87,6 @@ class AdminUserManagemenActivity : AppCompatActivity() {
                         .show()
                 }
             }
-
-            val editBtn = cardView.findViewById<Button>(R.id.btnEditUser)
-            editBtn.setOnClickListener {
-                showUserDialog(user)
-            }
         }
     }
 
@@ -106,22 +101,9 @@ class AdminUserManagemenActivity : AppCompatActivity() {
         val inputBirthday = dialogView.findViewById<EditText>(R.id.inputBirthday)
         val dbHelper = DatabaseHelper(this)
 
-        // Jika edit, isi data lama
-        if (user != null) {
-            inputUserName.setText(user.name)
-            inputPhoneNumber.setText(user.phone)
-            inputEmail.setText(user.email)
-            inputPassword.setText(user.password)
-            inputAbout.setText(user.about)
-            inputGender.setText(user.gender)
-            inputBirthday.setText(user.birthday)
-        }
-
-        val isEditing = user != null
-
         AlertDialog.Builder(this)
             .setView(dialogView)
-            .setTitle(if (isEditing) "Edit User" else "Add New User")
+            .setTitle("Add New User")
             .setPositiveButton("Save") { _, _ ->
                 val name = inputUserName.text.toString().trim()
                 val phone = inputPhoneNumber.text.toString().trim()
@@ -143,33 +125,12 @@ class AdminUserManagemenActivity : AppCompatActivity() {
                     return@setPositiveButton
                 }
 
-                if (isEditing) {
-                    val updatedUser = User(
-                        user!!.id,
-                        name,
-                        phone,
-                        email,
-                        user.password,
-                        about,
-                        gender,
-                        birthday,
-                        user.isAdmin
-                    )
-                    val success = dbHelper.updateUser(updatedUser)
-                    if (success) {
-                        Toast.makeText(this, "User updated!", Toast.LENGTH_SHORT).show()
-                        recreate()
-                    } else {
-                        Toast.makeText(this, "Failed to update", Toast.LENGTH_SHORT).show()
-                    }
+                val result = dbHelper.insertUserInAdmin(name, phone,  email, password, about, gender, birthday)
+                if (result != -1L) {
+                    Toast.makeText(this, "User added!", Toast.LENGTH_SHORT).show()
+                    recreate()
                 } else {
-                    val result = dbHelper.insertUserInAdmin(name, phone,  email, password, about, gender, birthday)
-                    if (result != -1L) {
-                        Toast.makeText(this, "User added!", Toast.LENGTH_SHORT).show()
-                        recreate()
-                    } else {
-                        Toast.makeText(this, "Failed to add user", Toast.LENGTH_SHORT).show()
-                    }
+                    Toast.makeText(this, "Failed to add user", Toast.LENGTH_SHORT).show()
                 }
             }
             .setNegativeButton("Cancel", null)
