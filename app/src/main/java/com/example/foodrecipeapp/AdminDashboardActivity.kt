@@ -56,5 +56,14 @@ class AdminDashboardActivity : AppCompatActivity() {
         binding.btnLogoutAdmin.setOnClickListener {
             logoutUser()
         }
+
+        val dbHelper = DatabaseHelper(this)
+        val countCategory = dbHelper.countCategory()
+        val countUser = dbHelper.countUser()
+        val countTechnique = dbHelper.countCookingTechnique()
+
+        binding.tvTotalCategories.text = "Total Categories : $countCategory"
+        binding.tvTotalTechniques.text = "Total Cooking Technique : $countTechnique"
+        binding.tvTotalUser.text = "Total User : $countUser"
     }
 }

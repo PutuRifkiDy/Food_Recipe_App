@@ -666,6 +666,69 @@ class DatabaseHelper(private val context: Context):
 
         return cookingTechniq
     }
-    // end get detail cooking technique berdasarkan id
+    // end get detail cooking technique berdasarkan
+//    fun countRecipeByUserId(userId: Int): Int {
+//        val db = readableDatabase
+//        val query = "SELECT COUNT(*) FROM recipe WHERE user_id = ?"
+//        val cursor = db.rawQuery(query, arrayOf(userId.toString()))
+//        var count = 0
+//
+//        if (cursor.moveToFirst()) {
+//            count = cursor.getInt(0)
+//        }
+//
+//        cursor.close()
+//        db.close()
+//        return count
+//    }
+    // start count category
+    fun countCategory(): Int {
+        val db = readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_CATEGORY"
+        val cursor = db.rawQuery(query, null)
+        var count_category = 0
+
+        if (cursor.moveToFirst()) {
+            count_category = cursor.getInt(0)
+        }
+
+        cursor.close()
+        return count_category
+    }
+    // end count category
+
+    // start count cooking technique
+    fun countCookingTechnique(): Int {
+        val db = readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_COOKING_TECHNIQUE"
+        val cursor = db.rawQuery(query, null)
+
+        var count_cookingTechnique = 0
+
+        if (cursor.moveToFirst()) {
+            count_cookingTechnique = cursor.getInt(0)
+        }
+
+        cursor.close()
+        return count_cookingTechnique
+    }
+    // end count cooking technique
+
+    // start count user
+    fun countUser(): Int {
+        val db = readableDatabase
+        val query = "SELECT COUNT(*) FROM $TABLE_USER"
+        val cursor = db.rawQuery(query, null)
+
+        var count_user = 0
+
+        if (cursor.moveToFirst()) {
+            count_user = cursor.getInt(0)
+        }
+
+        cursor.close()
+        return count_user
+    }
+    // end count user
 
 }

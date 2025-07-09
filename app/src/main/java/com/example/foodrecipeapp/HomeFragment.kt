@@ -96,7 +96,6 @@ class HomeFragment : Fragment() {
         // ambil remua recipe
         val recipeList = dbHelper.getAllRecipe()
         val containerComponent = view.findViewById<LinearLayout>(R.id.container_recipe)
-        containerComponent.removeAllViews()
 
         for(recipe in recipeList){
             val cardView = layoutInflater.inflate(R.layout.home_recipe_card, containerComponent, false)
@@ -129,7 +128,6 @@ class HomeFragment : Fragment() {
         // ambil semua cooking technique
         val cookingTechniqueList = dbHelper.getAllCookingTechnique()
         val containerCookingTechnique = view.findViewById<LinearLayout>(R.id.containerCookingTechnique)
-        containerComponent.removeAllViews()
 
         for(cookingTechnique in cookingTechniqueList) {
             val cardView = layoutInflater.inflate(R.layout.item_cooking_technique_home, null)
