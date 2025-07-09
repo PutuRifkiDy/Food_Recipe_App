@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Spinner
@@ -76,6 +77,13 @@ class AddRecipeFragment : Fragment() {
             startActivity(intent)
             requireActivity().finish()
             return null
+        }
+
+        val backButton = view.findViewById<ImageButton>(R.id.backButtonAdd)
+        backButton.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            intent.putExtra("navigate_to", "home")
+            startActivity(intent)
         }
 
         return view
