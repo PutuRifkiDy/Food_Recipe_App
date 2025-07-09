@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminDetailUserActivity">
+    <!-- Tombol Kembali -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:paddingTop="5dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_back"
+        android:contentDescription="Back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Judul "My Profile" -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detail User"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintStart_toEndOf="@id/btnBack" />
+
+    <!-- Deskripsi About -->
+    <TextView
+        android:id="@+id/tvAboutDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Label Tgl Lahir -->
+    <TextView
+        android:id="@+id/tvBirthLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birth Date"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAboutDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Tgl Lahir -->
+    <TextView
+        android:id="@+id/tvBirthDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvBirthLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <!-- Label Birth -->
+    <TextView
+        android:id="@+id/tvGenderLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBirthDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Gender -->
+    <TextView
+        android:id="@+id/tvGenderDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvGenderLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Label Phone Number -->
+    <TextView
+        android:id="@+id/tvPhoneNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvGenderDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Phone Number -->
+    <TextView
+        android:id="@+id/tvPhoneNumberDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumberLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Label Email -->
+    <TextView
+        android:id="@+id/tvEmailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberDesc"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Deskripsi Phone Number -->
+    <TextView
+        android:id="@+id/tvEmailDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Saya adalah pengguna aktif aplikasi ini yang suka memasak dan berbagi resep."
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

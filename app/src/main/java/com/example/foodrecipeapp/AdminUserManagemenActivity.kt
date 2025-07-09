@@ -48,6 +48,7 @@ class AdminUserManagemenActivity : AppCompatActivity() {
             val cardView = layoutInflater.inflate(R.layout.item_user_card, null)
             val tvUserName = cardView.findViewById<TextView>(R.id.tvNameUser)
             val tvAbout = cardView.findViewById<TextView>(R.id.tvDescriptionUser)
+            val btnSeeMore = cardView.findViewById<Button>(R.id.btnSeeMoreUser)
 
             tvUserName.text = user.name
             tvAbout.text = user.about
@@ -62,8 +63,6 @@ class AdminUserManagemenActivity : AppCompatActivity() {
             // menampilkan cardnya semua
             cardView.layoutParams = layoutParams
             container.addView(cardView)
-
-
 
             val deleteBtn  = cardView.findViewById<Button>(R.id.btnDeleteUser)
 
@@ -86,6 +85,12 @@ class AdminUserManagemenActivity : AppCompatActivity() {
                         .setNegativeButton("No", null)
                         .show()
                 }
+            }
+
+            btnSeeMore.setOnClickListener {
+                val intent = Intent(this, AdminDetailUserActivity::class.java)
+                intent.putExtra("user_id", user.id)
+                startActivity(intent)
             }
         }
     }

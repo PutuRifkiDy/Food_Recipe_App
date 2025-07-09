@@ -50,6 +50,15 @@
                 android:textColor="@android:color/white"
                 android:backgroundTint="#FF5656"
                 android:layout_marginStart="8dp"/>
+            <Button
+                android:id="@+id/btnSeeMoreUser"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:text="Delete"
+                android:textSize="11sp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/blue"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
